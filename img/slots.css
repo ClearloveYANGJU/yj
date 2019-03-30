@@ -1,0 +1,527 @@
+/* Title:       Slots stylesheet
+	 Theme URI:   http://www.casio.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+
+/* Column
+─────────────────────────────────────────────────────────────────────────────────── */
+
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	/* First Line */
+	.slots .grid--2 > .column > *:first-child,
+	.slots .grid--3 > .column > *:first-child,
+	.slots .grid--4 > .column > *:first-child,
+	.slots .grid--6 > .column > *:first-child,
+	.slots .grid--12 > .column > *:first-child,
+	.slots .grid-n--2 > .column > *:first-child,
+	.slots .grid-n--3 > .column > *:first-child,
+	.slots .grid-n--4 > .column > *:first-child,
+	.slots .grid-n--6 > .column > *:first-child,
+	.slots .grid-n--8 > .column > *:first-child {
+		margin-top: 0;
+	}
+
+	/* Secondary Line */
+	.slots .grid--2 > .column:nth-child(n+3),
+	.slots .grid--3 > .column:nth-child(n+4),
+	.slots .grid-mix.grid--3 > .column:nth-child(n+3),
+	.slots .grid--4 > .column:nth-child(n+5),
+	.slots .grid-mix.grid--4 > .column:nth-child(n+4),
+	.slots .grid--6 > .column:nth-child(n+7),
+	.slots .grid-mix.grid--6 > .column:nth-child(n+3),
+	.slots .grid-mix.grid--12 > .column:nth-child(n+3),
+	.slots .grid-n--2 > .column:nth-child(n+3),
+	.slots .grid-n--3 > .column:nth-child(n+4),
+	.slots .grid-n--4 > .column:nth-child(n+5),
+	.slots .grid-n--6 > .column:nth-child(n+7),
+	.slots .grid-n--8 > .column:nth-child(n+3) {
+		padding-top: 1em;
+	}
+
+}
+
+
+/* Headers
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.slots .header-grid.frame > .column {
+	padding-bottom: 0;
+}
+
+/* inner column */
+.slots .column .t-size-x-small,
+.slots .column .t-size-xx-small {
+	margin-top: 1em;
+}
+
+/* primary */
+.slots + .slots > .header-grid:first-child {
+	padding-top: 0;
+}
+
+
+/* SP < 768px */
+@media print, screen and (max-width: 47.9em) {
+
+	.slots .header-grid.frame > .column .underline {
+		margin-bottom: 1em;
+	}
+	.slots article .header-grid + .frame > .column > *:first-child {
+		margin-top: 0;
+	}
+
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	/* primary */
+	.slots > .header-grid:first-child > .column {
+		padding-bottom: 0;
+	}
+
+}
+
+
+/* hr
+─────────────────────────────────────────────────────────────────────────────────── */
+.slots .outer > hr {
+	display: none;
+}
+.slots .outer > hr {
+	margin: 0 1.5%;
+}
+.slots hr.for-pc {
+	display: none;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	.slots > hr,
+	.slots .outer > hr {
+		display: block;
+		margin: 1em 8.84%;
+	}
+	.slots hr.for-pc {
+		display: block;
+	}
+	.slots hr.for-pc + .grid--2.frame {
+		padding-top: 1.5em;
+	}
+
+}
+
+/* PC > 1200px */
+@media print, screen and (min-width: 75em) {
+
+	/* hr */
+	.slots > hr,
+	.slots .outer > hr {
+		width: 65.8em;
+		margin: 3em auto;
+	}
+
+	.narrow-wrap .outer > hr {
+		width: auto;
+		margin: 0 -1.5em;
+	}
+	.narrow-wrap .outer > hr + [class*="grid"] [class*="title"]:only-child {
+		margin-bottom: 0;
+	}
+
+}
+
+
+/* frame
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.slots .frame {
+	padding-bottom: 0;
+}
+
+.slots .frame > .column {
+	padding-bottom: 1em;
+}
+.slots .frame > .column > ul,
+.slots .frame > .column > p {
+	margin-bottom: 0;
+}
+
+/* grid-2 */
+
+.slots .frame.grid-2 {
+	position: relative;
+}
+.slots .frame.grid-2:before {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 3.4%;
+	right: 3.4%;
+	height: auto;
+
+	background: #fff;
+}
+.slots .narrow-wrap .frame.grid-2:before {
+	left: 1.48%;
+	right: 1.48%;
+}
+
+.slots .frame.grid-2 > .column {
+	position: relative;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	.slots .frame:not(.header-grid) ~ .frame > .column:first-child,
+	.slots .frame:not(.header-grid) ~ .frame.grid-2 > .column:first-child + .column {
+		padding-top: 0;
+	}
+	.slots .frame.header-grid + .frame {
+		padding-top: 1em;
+	}
+	.slots .frame.grid-2:before {
+		display: none;
+	}
+
+}
+/* SP < 768px */
+@media print, screen and (max-width: 47.9em) {
+	.slots .frame > .column.no-pb {
+	padding-bottom: 0;
+	}
+}
+
+
+/* figcaption
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.slots .frame > .column figcaption {
+	margin-top: 1em;
+}
+
+
+/* Button
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.slots .more {
+	padding-bottom: 1em;
+	margin-top: 1em;
+}
+.slots .column * + div .button-sec {
+	margin-top: 1em;
+}
+.slots .grid-n--2.narrow .button-sec {
+	padding: .9em 2.6em;
+}
+
+
+/* layout - no header
+─────────────────────────────────────────────────────────────────────────────────── */
+
+/* Figure - 1column */
+.slots .grid--1 figure.column:first-child {
+	padding-top: 1em;
+}
+
+/* List - 1column */
+.slots .column > ul:first-child {
+	margin-top: 2em;
+}
+
+
+/* layout - 2column (figure + text)
+─────────────────────────────────────────────────────────────────────────────────── */
+
+/* reverse */
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	/* reverse */
+	.slots .grid-reverse > figure.column:first-child {
+		float: right;
+	}
+
+}
+
+
+/* layout - grid-mix 2column 2:1
+─────────────────────────────────────────────────────────────────────────────────── */
+
+/* Figure Bottom */
+.slots .grid-img-bottom.grid-mix.grid--3 > .column .figure img {
+	display: inline-block;
+	max-width: 100%;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	/* Figure Bottom */
+	.slots .grid-img-bottom.grid-mix.grid--3 {
+		display: table;
+		table-layout: fixed;
+		border-spacing: 0;
+		border-collapse: collapse;
+		width: 100%;
+		max-width: 80em;
+		padding: 0 8.84%;
+	}
+	.slots .grid-img-bottom.grid-mix.grid--3 > .column {
+		float: none;
+		display: table-cell;
+	}
+	.slots .grid-img-bottom.grid-mix.grid--3 > .column.column-main {
+		width: 54.35%;
+	}
+	.slots .grid-img-bottom.grid-mix.grid--3 > .column {
+		width: 28%;
+		padding: 1em 0 1em 2%;
+		vertical-align: bottom;
+	}
+	.slots .grid-img-bottom.grid-mix.grid--3 .figure {
+		margin-left: 0;
+		margin-right: 0;
+		max-width: 100%;
+	}
+	.slots .grid-img-bottom.grid-mix.grid--3 > figure.column > .figure {
+		margin: 0;
+		width: 100%;
+	}
+
+}
+
+/* layout - Narrow 2column カラム内に余白ありパターン 1:1:1
+─────────────────────────────────────────────────────────────────────────────────── */
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	.grid-n--2.narrow > .column ul > li,
+	.grid-n--2.narrow > .column ol > li {
+		padding-left: 10%;
+	}
+}
+
+
+
+/* layout - Narrow 3column 1:1:1
+─────────────────────────────────────────────────────────────────────────────────── */
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	.grid-n--3 > .column ul > li,
+	.grid-n--3 > .column ol > li {
+		padding-left: 10%;
+	}
+}
+
+
+/* layout - 4column 1:1:1:1
+─────────────────────────────────────────────────────────────────────────────────── */
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	.grid--4 > .column ul > li,
+	.grid--4 > .column ol > li {
+		padding-left: 5%;
+	}
+
+	.grid-n--4 > .column ul > li,
+	.grid-n--4 > .column ol > li {
+		padding-left: 10%;
+	}
+}
+
+
+/* layout - 6column 1:1:1:1:1:1
+─────────────────────────────────────────────────────────────────────────────────── */
+.grid--6 > .column ul:not(.note) > li,
+.grid--6 > .column ol:not(.note) > li {
+	padding-left: 10%;
+}
+
+.grid-mix.grid--6 > .column ul:not(.note) > li,
+.grid-mix.grid--6 > .column ol:not(.note) > li {
+	padding-left: 2%;
+}
+
+
+/* layout - exword grid-mix 3column 2:1:1
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.slots.exword .grid-mix.grid-2.grid--4 .column {
+	padding-bottom: 1em;
+}
+
+.exword .header-grid .column [class*="title"]:only-child {
+	margin-bottom: 1em;
+}
+
+/* Headers */
+.slots.exword .title + .title {
+	margin-top: -1em;
+}
+
+/* Navigation */
+.slots.exword nav {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+}
+.slots.exword nav .anchor {
+	padding-top: .5em;
+	font-size: 1em;
+}
+.slots.exword nav .anchor a {
+	margin-bottom: .5em;
+}
+
+/* SP < 768px */
+@media print, screen and (max-width: 47.9em) {
+
+	.slots.exword article:not(:last-child) {
+		padding-bottom: 0;
+	}
+
+	/* Navigation */
+	.slots.exword nav .anchor a:hover:after {
+		content: none;
+	}
+
+	/* Image */
+	.slots.exword .column .figure div {
+		text-align: center;
+	}
+	.slots.exword .column .figure div img {
+		display: inline-block;
+	}
+
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	/* Image - 4:3 */
+	.slots.exword .column .figure div {
+		position: relative;
+		padding-bottom: 86.25%;
+	}
+	.slots.exword .column .figure div img {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: -7.5%;
+		right: -7.5%;
+		max-height: 100%;
+		margin: auto;
+	}
+
+	/* Image - 8:3 */
+	.slots.exword .column-main .figure div {
+		position: relative;
+		padding-bottom: 38.3%;
+	}
+	.slots.exword .column-main .figure div img {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: -3.4%;
+		right: -3.4%;
+		max-height: 100%;
+		margin: auto;
+	}
+}
+
+/* layout - exword grid-mix 6column 1:5
+─────────────────────────────────────────────────────────────────────────────────── */
+
+/* SP < 768px */
+@media print, screen and (max-width: 47.9em) {
+	.slots .grid-mix.grid--6 .column .figure {
+		width: 70%;
+		margin: 0 auto;
+	}
+}
+
+
+/* layout - exword grid-mix 12column 1:11
+─────────────────────────────────────────────────────────────────────────────────── */
+
+/* SP < 768px */
+@media print, screen and (max-width: 47.9em) {
+	.slots .grid-mix.grid--12 .column .figure {
+		width: 33%;
+		margin: 0 auto;
+	}
+}
+
+
+/* Widget
+─────────────────────────────────────────────────────────────────────────────────── */
+
+/* Youtube - 4:3 */
+.slots .movie {
+	position: relative;
+	height: 0;
+	padding: 75% 0 0;
+	overflow: hidden;
+	background-color: #ccc;
+}
+.slots .movie iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	.slots .movie ~ p.small {
+		margin-left: -2.5%;
+		margin-right: -2.5%;
+		max-width: 105%;
+	}
+}
+
+/* application developer
+─────────────────────────────────────────────────────────────────────────────────── */
+.slots .application-section .column {
+	margin-bottom: 1em;
+}
+.application-image {
+	height: 6.667em;
+}
+.application-image img {
+	height: 5.333em;
+}
+.application-developer {
+	text-align: center;
+}
+.application-developer p {
+	display: inline-block;
+	margin-bottom: 0;
+}
+.application-developer p + p {
+	margin-top: 0;
+}
+.application-developer p a img {
+	height: 2.867em;
+}
+.application-developer p a img {
+	height: 2.867em;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	.slots .application-section .application-frame .column {
+		margin-bottom: 1.333em;
+	}
+
+}

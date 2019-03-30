@@ -1,0 +1,710 @@
+/* Title:       Typography stylesheet
+   Theme URI:   http://www.casio.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+
+/* Main icons
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.icon							{ display: inline-block; overflow: hidden;
+									position: relative; top: .1em;
+									width: 1em; height: 1em;
+									background-image: url('../images/icons.svg'); background-repeat: no-repeat;
+									background-size: 17em 113em; }
+.no-svg .icon					{ width: 15px; height: 15px; font-size: 15px;
+									background-image: url('../images/icons@1x.png'); }
+/* Print Style Sheet  */
+@media print {
+	.icon {
+		-webkit-print-color-adjust: exact;
+	}
+}
+
+/* Sizes */
+.icon-small						{ font-size: .8em; }
+.no-svg .icon-small				{ width: 12px; height: 12px; font-size: 12px;
+									background-image: url('../images/icons@08x.png'); }
+.icon-large						{ font-size: 2em; }
+.no-svg .icon-large				{ width: 30px; height: 30px; font-size: 30px;
+									background-image: url('../images/icons@2x.png'); }
+.icon-xlarge					{ font-size: 4em; }
+.no-svg .icon-xlarge			{ width: 60px; height: 60px; font-size: 60px;
+									background-image: url('../images/icons@4x.png'); }
+
+
+/* Arrowhead right */
+.icon-ah-r						{ background-position:  0    0; }
+.icon-ah-r-black				{ background-position: -2em  0; }
+.icon-ah-r-blue-deep			{ background-position: -4em  0; }
+.icon-ah-r-blue-light			{ background-position: -6em  0; }
+.icon-ah-r-blue-xlight			{ background-position: -8em  0; }
+.icon-ah-r-grey-deep			{ background-position: -10em 0; }
+.icon-ah-r-grey-light			{ background-position: -12em 0; }
+.icon-ah-r-grey-xlight			{ background-position: -14em 0; }
+.icon-ah-r-white				{ background-position: -16em 0; }
+
+/* Arrowhead right */
+.icon-ah-l						{ background-position:  0    -2em; }
+.icon-ah-l-black				{ background-position: -2em  -2em; }
+.icon-ah-l-blue-deep			{ background-position: -4em  -2em; }
+.icon-ah-l-blue-light			{ background-position: -6em  -2em; }
+.icon-ah-l-blue-xlight			{ background-position: -8em  -2em; }
+.icon-ah-l-grey-deep			{ background-position: -10em -2em; }
+.icon-ah-l-grey-light			{ background-position: -12em -2em; }
+.icon-ah-l-grey-xlight			{ background-position: -14em -2em; }
+.icon-ah-l-white				{ background-position: -16em -2em; }
+
+/* Arrowhead top */
+.icon-ah-t						{ background-position:  0    -4em; }
+.icon-ah-t-black				{ background-position: -2em  -4em; }
+.icon-ah-t-blue-deep			{ background-position: -4em  -4em; }
+.icon-ah-t-blue-light			{ background-position: -6em  -4em; }
+.icon-ah-t-blue-xlight			{ background-position: -8em  -4em; }
+.icon-ah-t-grey-deep			{ background-position: -10em -4em; }
+.icon-ah-t-grey-light			{ background-position: -12em -4em; }
+.icon-ah-t-grey-xlight			{ background-position: -14em -4em; }
+.icon-ah-t-white				{ background-position: -16em -4em; }
+
+/* Arrowhead bottom */
+.icon-ah-b						{ background-position:  0    -6em; }
+.icon-ah-b-black				{ background-position: -2em  -6em; }
+.icon-ah-b-blue-deep			{ background-position: -4em  -6em; }
+.icon-ah-b-blue-light			{ background-position: -6em  -6em; }
+.icon-ah-b-blue-xlight			{ background-position: -8em  -6em; }
+.icon-ah-b-grey-deep			{ background-position: -10em -6em; }
+.icon-ah-b-grey-light			{ background-position: -12em -6em; }
+.icon-ah-b-grey-xlight			{ background-position: -14em -6em; }
+.icon-ah-b-white				{ background-position: -16em -6em; }
+
+/* Arrowhead thin right */
+.icon-ah-thin-r					{ background-position:  0    -8em; }
+.icon-ah-thin-r-black			{ background-position: -2em  -8em; }
+.icon-ah-thin-r-blue-deep		{ background-position: -4em  -8em; }
+.icon-ah-thin-r-blue-light		{ background-position: -6em  -8em; }
+.icon-ah-thin-r-blue-xlight		{ background-position: -8em  -8em; }
+.icon-ah-thin-r-grey-deep		{ background-position: -10em -8em; }
+.icon-ah-thin-r-grey-light		{ background-position: -12em -8em; }
+.icon-ah-thin-r-grey-xlight		{ background-position: -14em -8em; }
+.icon-ah-thin-r-white			{ background-position: -16em -8em; }
+
+/* Arrowhead thin left */
+.icon-ah-thin-l					{ background-position:  0    -10em; }
+.icon-ah-thin-l-black			{ background-position: -2em  -10em; }
+.icon-ah-thin-l-blue-deep		{ background-position: -4em  -10em; }
+.icon-ah-thin-l-blue-light		{ background-position: -6em  -10em; }
+.icon-ah-thin-l-blue-xlight		{ background-position: -8em  -10em; }
+.icon-ah-thin-l-grey-deep		{ background-position: -10em -10em; }
+.icon-ah-thin-l-grey-light		{ background-position: -12em -10em; }
+.icon-ah-thin-l-grey-xlight		{ background-position: -14em -10em; }
+.icon-ah-thin-l-white			{ background-position: -16em -10em; }
+
+/* Arrowhead thin top */
+.icon-ah-thin-t					{ background-position:  0    -12em; }
+.icon-ah-thin-t-black			{ background-position: -2em  -12em; }
+.icon-ah-thin-t-blue-deep		{ background-position: -4em  -12em; }
+.icon-ah-thin-t-blue-light		{ background-position: -6em  -12em; }
+.icon-ah-thin-t-blue-xlight		{ background-position: -8em  -12em; }
+.icon-ah-thin-t-grey-deep		{ background-position: -10em -12em; }
+.icon-ah-thin-t-grey-light		{ background-position: -12em -12em; }
+.icon-ah-thin-t-grey-xlight		{ background-position: -14em -12em; }
+.icon-ah-thin-t-white			{ background-position: -16em -12em; }
+
+/* Arrowhead thin bottom */
+.icon-ah-thin-b					{ background-position:  0    -14em; }
+.icon-ah-thin-b-black			{ background-position: -2em  -14em; }
+.icon-ah-thin-b-blue-deep		{ background-position: -4em  -14em; }
+.icon-ah-thin-b-blue-light		{ background-position: -6em  -14em; }
+.icon-ah-thin-b-blue-xlight		{ background-position: -8em  -14em; }
+.icon-ah-thin-b-grey-deep		{ background-position: -10em -14em; }
+.icon-ah-thin-b-grey-light		{ background-position: -12em -14em; }
+.icon-ah-thin-b-grey-xlight		{ background-position: -14em -14em; }
+.icon-ah-thin-b-white			{ background-position: -16em -14em; }
+
+/* Arrowhead pointing right */
+.icon-ah-point-r				{ background-position:  0    -16em; }
+.icon-ah-point-r-black			{ background-position: -2em  -16em; }
+.icon-ah-point-r-blue-deep		{ background-position: -4em  -16em; }
+.icon-ah-point-r-blue-light		{ background-position: -6em  -16em; }
+.icon-ah-point-r-blue-xlight	{ background-position: -8em  -16em; }
+.icon-ah-point-r-grey-deep		{ background-position: -10em -16em; }
+.icon-ah-point-r-grey-light		{ background-position: -12em -16em; }
+.icon-ah-point-r-grey-xlight	{ background-position: -14em -16em; }
+.icon-ah-point-r-white			{ background-position: -16em -16em; }
+
+/* Arrowhead pointing left */
+.icon-ah-point-l				{ background-position:  0    -18em; }
+.icon-ah-point-l-black			{ background-position: -2em  -18em; }
+.icon-ah-point-l-blue-deep		{ background-position: -4em  -18em; }
+.icon-ah-point-l-blue-light		{ background-position: -6em  -18em; }
+.icon-ah-point-l-blue-xlight	{ background-position: -8em  -18em; }
+.icon-ah-point-l-grey-deep		{ background-position: -10em -18em; }
+.icon-ah-point-l-grey-light		{ background-position: -12em -18em; }
+.icon-ah-point-l-grey-xlight	{ background-position: -14em -18em; }
+.icon-ah-point-l-white			{ background-position: -16em -18em; }
+
+/* Arrowhead pointing top */
+.icon-ah-point-t				{ background-position:  0    -20em; }
+.icon-ah-point-t-black			{ background-position: -2em  -20em; }
+.icon-ah-point-t-blue-deep		{ background-position: -4em  -20em; }
+.icon-ah-point-t-blue-light		{ background-position: -6em  -20em; }
+.icon-ah-point-t-blue-xlight	{ background-position: -8em  -20em; }
+.icon-ah-point-t-grey-deep		{ background-position: -10em -20em; }
+.icon-ah-point-t-grey-light		{ background-position: -12em -20em; }
+.icon-ah-point-t-grey-xlight	{ background-position: -14em -20em; }
+.icon-ah-point-t-white			{ background-position: -16em -20em; }
+
+/* Arrowhead pointing bottom */
+.icon-ah-point-b				{ background-position:  0    -22em; }
+.icon-ah-point-b-black			{ background-position: -2em  -22em; }
+.icon-ah-point-b-blue-deep		{ background-position: -4em  -22em; }
+.icon-ah-point-b-blue-light		{ background-position: -6em  -22em; }
+.icon-ah-point-b-blue-xlight	{ background-position: -8em  -22em; }
+.icon-ah-point-b-grey-deep		{ background-position: -10em -22em; }
+.icon-ah-point-b-grey-light		{ background-position: -12em -22em; }
+.icon-ah-point-b-grey-xlight	{ background-position: -14em -22em; }
+.icon-ah-point-b-white			{ background-position: -16em -22em; }
+
+/* Close */
+.icon-close						{ background-position:  0    -24em; }
+.icon-close-black				{ background-position: -2em  -24em; }
+.icon-close-blue-deep			{ background-position: -4em  -24em; }
+.icon-close-blue-light			{ background-position: -6em  -24em; }
+.icon-close-blue-xlight			{ background-position: -8em  -24em; }
+.icon-close-grey-deep			{ background-position: -10em -24em; }
+.icon-close-grey-light			{ background-position: -12em -24em; }
+.icon-close-grey-xlight			{ background-position: -14em -24em; }
+.icon-close-white				{ background-position: -16em -24em; }
+
+/* Close thin */
+.icon-close-thin				{ background-position:  0    -26em; }
+.icon-close-thin-black			{ background-position: -2em  -26em; }
+.icon-close-thin-blue-deep		{ background-position: -4em  -26em; }
+.icon-close-thin-blue-light		{ background-position: -6em  -26em; }
+.icon-close-thin-blue-xlight	{ background-position: -8em  -26em; }
+.icon-close-thin-grey-deep		{ background-position: -10em -26em; }
+.icon-close-thin-grey-light		{ background-position: -12em -26em; }
+.icon-close-thin-grey-xlight	{ background-position: -14em -26em; }
+.icon-close-thin-white			{ background-position: -16em -26em; }
+
+/* Plus */
+.icon-plus						{ background-position:  0    -28em; }
+.icon-plus-black				{ background-position: -2em  -28em; }
+.icon-plus-blue-deep			{ background-position: -4em  -28em; }
+.icon-plus-blue-light			{ background-position: -6em  -28em; }
+.icon-plus-blue-xlight			{ background-position: -8em  -28em; }
+.icon-plus-grey-deep			{ background-position: -10em -28em; }
+.icon-plus-grey-light			{ background-position: -12em -28em; }
+.icon-plus-grey-xlight			{ background-position: -14em -28em; }
+.icon-plus-white				{ background-position: -16em -28em; }
+
+/* Plus thin */
+.icon-plus-thin					{ background-position:  0    -30em; }
+.icon-plus-thin-black			{ background-position: -2em  -30em; }
+.icon-plus-thin-blue-deep		{ background-position: -4em  -30em; }
+.icon-plus-thin-blue-light		{ background-position: -6em  -30em; }
+.icon-plus-thin-blue-xlight		{ background-position: -8em  -30em; }
+.icon-plus-thin-grey-deep		{ background-position: -10em -30em; }
+.icon-plus-thin-grey-light		{ background-position: -12em -30em; }
+.icon-plus-thin-grey-xlight		{ background-position: -14em -30em; }
+.icon-plus-thin-white			{ background-position: -16em -30em; }
+
+/* Minus */
+.icon-minus						{ background-position:  0    -32em; }
+.icon-minus-black				{ background-position: -2em  -32em; }
+.icon-minus-blue-deep			{ background-position: -4em  -32em; }
+.icon-minus-blue-light			{ background-position: -6em  -32em; }
+.icon-minus-blue-xlight			{ background-position: -8em  -32em; }
+.icon-minus-grey-deep			{ background-position: -10em -32em; }
+.icon-minus-grey-light			{ background-position: -12em -32em; }
+.icon-minus-grey-xlight			{ background-position: -14em -32em; }
+.icon-minus-white				{ background-position: -16em -32em; }
+
+/* Minus thin */
+.icon-minus-thin				{ background-position:  0    -34em; }
+.icon-minus-thin-black			{ background-position: -2em  -34em; }
+.icon-minus-thin-blue-deep		{ background-position: -4em  -34em; }
+.icon-minus-thin-blue-light		{ background-position: -6em  -34em; }
+.icon-minus-thin-blue-xlight	{ background-position: -8em  -34em; }
+.icon-minus-thin-grey-deep		{ background-position: -10em -34em; }
+.icon-minus-thin-grey-light		{ background-position: -12em -34em; }
+.icon-minus-thin-grey-xlight	{ background-position: -14em -34em; }
+.icon-minus-thin-white			{ background-position: -16em -34em; }
+
+/* Home */
+.icon-home						{ background-position:  0    -36em; }
+.icon-home-black				{ background-position: -2em  -36em; }
+.icon-home-blue-deep			{ background-position: -4em  -36em; }
+.icon-home-blue-light			{ background-position: -6em  -36em; }
+.icon-home-blue-xlight			{ background-position: -8em  -36em; }
+.icon-home-grey-deep			{ background-position: -10em -36em; }
+.icon-home-grey-light			{ background-position: -12em -36em; }
+.icon-home-grey-xlight			{ background-position: -14em -36em; }
+.icon-home-white				{ background-position: -16em -36em; }
+
+/* Global */
+.icon-global					{ background-position:  0    -38em; }
+.icon-global-black				{ background-position: -2em  -38em; }
+.icon-global-blue-deep			{ background-position: -4em  -38em; }
+.icon-global-blue-light			{ background-position: -6em  -38em; }
+.icon-global-blue-xlight		{ background-position: -8em  -38em; }
+.icon-global-grey-deep			{ background-position: -10em -38em; }
+.icon-global-grey-light			{ background-position: -12em -38em; }
+.icon-global-grey-xlight		{ background-position: -14em -38em; }
+.icon-global-white				{ background-position: -16em -38em; }
+
+/* Menu */
+.icon-menu						{ background-position:  0    -40em; }
+.icon-menu-black				{ background-position: -2em  -40em; }
+.icon-menu-blue-deep			{ background-position: -4em  -40em; }
+.icon-menu-blue-light			{ background-position: -6em  -40em; }
+.icon-menu-blue-xlight			{ background-position: -8em  -40em; }
+.icon-menu-grey-deep			{ background-position: -10em -40em; }
+.icon-menu-grey-light			{ background-position: -12em -40em; }
+.icon-menu-grey-xlight			{ background-position: -14em -40em; }
+.icon-menu-white				{ background-position: -16em -40em; }
+
+/* Search */
+.icon-search					{ background-position:  0    -42em; }
+.icon-search-black				{ background-position: -2em  -42em; }
+.icon-search-blue-deep			{ background-position: -4em  -42em; }
+.icon-search-blue-light			{ background-position: -6em  -42em; }
+.icon-search-blue-xlight		{ background-position: -8em  -42em; }
+.icon-search-grey-deep			{ background-position: -10em -42em; }
+.icon-search-grey-light			{ background-position: -12em -42em; }
+.icon-search-grey-xlight		{ background-position: -14em -42em; }
+.icon-search-white				{ background-position: -16em -42em; }
+
+/* Zoom‐in */
+.icon-zoom-in					{ background-position:  0    -44em; }
+.icon-zoom-in-black				{ background-position: -2em  -44em; }
+.icon-zoom-in-blue-deep			{ background-position: -4em  -44em; }
+.icon-zoom-in-blue-light		{ background-position: -6em  -44em; }
+.icon-zoom-in-blue-xlight		{ background-position: -8em  -44em; }
+.icon-zoom-in-grey-deep			{ background-position: -10em -44em; }
+.icon-zoom-in-grey-light		{ background-position: -12em -44em; }
+.icon-zoom-in-grey-xlight		{ background-position: -14em -44em; }
+.icon-zoom-in-white				{ background-position: -16em -44em; }
+
+/* Zoom‐out */
+.icon-zoom-out					{ background-position:  0    -46em; }
+.icon-zoom-out-black			{ background-position: -2em  -46em; }
+.icon-zoom-out-blue-deep		{ background-position: -4em  -46em; }
+.icon-zoom-out-blue-light		{ background-position: -6em  -46em; }
+.icon-zoom-out-blue-xlight		{ background-position: -8em  -46em; }
+.icon-zoom-out-grey-deep		{ background-position: -10em -46em; }
+.icon-zoom-out-grey-light		{ background-position: -12em -46em; }
+.icon-zoom-out-grey-xlight		{ background-position: -14em -46em; }
+.icon-zoom-out-white			{ background-position: -16em -46em; }
+
+/* Play */
+.icon-play						{ background-position:  0    -48em; }
+.icon-play-black				{ background-position: -2em  -48em; }
+.icon-play-blue-deep			{ background-position: -4em  -48em; }
+.icon-play-blue-light			{ background-position: -6em  -48em; }
+.icon-play-blue-xlight			{ background-position: -8em  -48em; }
+.icon-play-grey-deep			{ background-position: -10em -48em; }
+.icon-play-grey-light			{ background-position: -12em -48em; }
+.icon-play-grey-xlight			{ background-position: -14em -48em; }
+.icon-play-white				{ background-position: -16em -48em; }
+
+/* Stop */
+.icon-stop						{ background-position:  0    -50em; }
+.icon-stop-black				{ background-position: -2em  -50em; }
+.icon-stop-blue-deep			{ background-position: -4em  -50em; }
+.icon-stop-blue-light			{ background-position: -6em  -50em; }
+.icon-stop-blue-xlight			{ background-position: -8em  -50em; }
+.icon-stop-grey-deep			{ background-position: -10em -50em; }
+.icon-stop-grey-light			{ background-position: -12em -50em; }
+.icon-stop-grey-xlight			{ background-position: -14em -50em; }
+.icon-stop-white				{ background-position: -16em -50em; }
+
+/* External link */
+.icon-link-ext					{ background-position:  0    -52em; }
+.icon-link-ext-black			{ background-position: -2em  -52em; }
+.icon-link-ext-blue-deep		{ background-position: -4em  -52em; }
+.icon-link-ext-blue-light		{ background-position: -6em  -52em; }
+.icon-link-ext-blue-xlight		{ background-position: -8em  -52em; }
+.icon-link-ext-grey-deep		{ background-position: -10em -52em; }
+.icon-link-ext-grey-light		{ background-position: -12em -52em; }
+.icon-link-ext-grey-xlight		{ background-position: -14em -52em; }
+.icon-link-ext-white			{ background-position: -16em -52em; }
+
+/* Email */
+.icon-email						{ background-position:  0    -54em; }
+.icon-email-black				{ background-position: -2em  -54em; }
+.icon-email-blue-deep			{ background-position: -4em  -54em; }
+.icon-email-blue-light			{ background-position: -6em  -54em; }
+.icon-email-blue-xlight			{ background-position: -8em  -54em; }
+.icon-email-grey-deep			{ background-position: -10em -54em; }
+.icon-email-grey-light			{ background-position: -12em -54em; }
+.icon-email-grey-xlight			{ background-position: -14em -54em; }
+.icon-email-white				{ background-position: -16em -54em; }
+
+/* Telephone */
+.icon-tel						{ background-position:  0    -56em; }
+.icon-tel-black					{ background-position: -2em  -56em; }
+.icon-tel-blue-deep				{ background-position: -4em  -56em; }
+.icon-tel-blue-light			{ background-position: -6em  -56em; }
+.icon-tel-blue-xlight			{ background-position: -8em  -56em; }
+.icon-tel-grey-deep				{ background-position: -10em -56em; }
+.icon-tel-grey-light			{ background-position: -12em -56em; }
+.icon-tel-grey-xlight			{ background-position: -14em -56em; }
+.icon-tel-white					{ background-position: -16em -56em; }
+
+/* Calendar */
+.icon-cal						{ background-position:  0    -58em; }
+.icon-cal-black					{ background-position: -2em  -58em; }
+.icon-cal-blue-deep				{ background-position: -4em  -58em; }
+.icon-cal-blue-light			{ background-position: -6em  -58em; }
+.icon-cal-blue-xlight			{ background-position: -8em  -58em; }
+.icon-cal-grey-deep				{ background-position: -10em -58em; }
+.icon-cal-grey-light			{ background-position: -12em -58em; }
+.icon-cal-grey-xlight			{ background-position: -14em -58em; }
+.icon-cal-white					{ background-position: -16em -58em; }
+
+/* Calendar alternative (empty) */
+.icon-cal-alt					{ background-position:  0    -60em; }
+.icon-cal-alt-black				{ background-position: -2em  -60em; }
+.icon-cal-alt-blue-deep			{ background-position: -4em  -60em; }
+.icon-cal-alt-blue-light		{ background-position: -6em  -60em; }
+.icon-cal-alt-blue-xlight		{ background-position: -8em  -60em; }
+.icon-cal-alt-grey-deep			{ background-position: -10em -60em; }
+.icon-cal-alt-grey-light		{ background-position: -12em -60em; }
+.icon-cal-alt-grey-xlight		{ background-position: -14em -60em; }
+.icon-cal-alt-white				{ background-position: -16em -60em; }
+
+/* Download */
+.icon-download					{ background-position:  0    -62em; }
+.icon-download-black			{ background-position: -2em  -62em; }
+.icon-download-blue-deep		{ background-position: -4em  -62em; }
+.icon-download-blue-light		{ background-position: -6em  -62em; }
+.icon-download-blue-xlight		{ background-position: -8em  -62em; }
+.icon-download-grey-deep		{ background-position: -10em -62em; }
+.icon-download-grey-light		{ background-position: -12em -62em; }
+.icon-download-grey-xlight		{ background-position: -14em -62em; }
+.icon-download-white			{ background-position: -16em -62em; }
+
+/* Shopping cart */
+.icon-shop						{ background-position:  0    -64em; }
+.icon-shop-black				{ background-position: -2em  -64em; }
+.icon-shop-blue-deep			{ background-position: -4em  -64em; }
+.icon-shop-blue-light			{ background-position: -6em  -64em; }
+.icon-shop-blue-xlight			{ background-position: -8em  -64em; }
+.icon-shop-grey-deep			{ background-position: -10em -64em; }
+.icon-shop-grey-light			{ background-position: -12em -64em; }
+.icon-shop-grey-xlight			{ background-position: -14em -64em; }
+.icon-shop-white				{ background-position: -16em -64em; }
+
+/* Warning */
+.icon-warning					{ background-position:  0    -66em; }
+.icon-warning-black				{ background-position: -2em  -66em; }
+.icon-warning-blue-deep			{ background-position: -4em  -66em; }
+.icon-warning-blue-light		{ background-position: -6em  -66em; }
+.icon-warning-blue-xlight		{ background-position: -8em  -66em; }
+.icon-warning-grey-deep			{ background-position: -10em -66em; }
+.icon-warning-grey-light		{ background-position: -12em -66em; }
+.icon-warning-grey-xlight		{ background-position: -14em -66em; }
+.icon-warning-white				{ background-position: -16em -66em; }
+
+/* Attention */
+.icon-attention					{ background-position:  0    -68em; }
+.icon-attention-black			{ background-position: -2em  -68em; }
+.icon-attention-blue-deep		{ background-position: -4em  -68em; }
+.icon-attention-blue-light		{ background-position: -6em  -68em; }
+.icon-attention-blue-xlight		{ background-position: -8em  -68em; }
+.icon-attention-grey-deep		{ background-position: -10em -68em; }
+.icon-attention-grey-light		{ background-position: -12em -68em; }
+.icon-attention-grey-xlight		{ background-position: -14em -68em; }
+.icon-attention-white			{ background-position: -16em -68em; }
+
+/* Document */
+.icon-doc						{ background-position:  0    -70em; }
+.icon-doc-black					{ background-position: -2em  -70em; }
+.icon-doc-blue-deep				{ background-position: -4em  -70em; }
+.icon-doc-blue-light			{ background-position: -6em  -70em; }
+.icon-doc-blue-xlight			{ background-position: -8em  -70em; }
+.icon-doc-grey-deep				{ background-position: -10em -70em; }
+.icon-doc-grey-light			{ background-position: -12em -70em; }
+.icon-doc-grey-xlight			{ background-position: -14em -70em; }
+.icon-doc-white					{ background-position: -16em -70em; }
+
+/* Present */
+.icon-present					{ background-position:  0    -72em; }
+.icon-present-black				{ background-position: -2em  -72em; }
+.icon-present-blue-deep			{ background-position: -4em  -72em; }
+.icon-present-blue-light		{ background-position: -6em  -72em; }
+.icon-present-blue-xlight		{ background-position: -8em  -72em; }
+.icon-present-grey-deep			{ background-position: -10em -72em; }
+.icon-present-grey-light		{ background-position: -12em -72em; }
+.icon-present-grey-xlight		{ background-position: -14em -72em; }
+.icon-present-white				{ background-position: -16em -72em; }
+
+/* News */
+.icon-news						{ background-position:  0    -74em; }
+.icon-news-black				{ background-position: -2em  -74em; }
+.icon-news-blue-deep			{ background-position: -4em  -74em; }
+.icon-news-blue-light			{ background-position: -6em  -74em; }
+.icon-news-blue-xlight			{ background-position: -8em  -74em; }
+.icon-news-grey-deep			{ background-position: -10em -74em; }
+.icon-news-grey-light			{ background-position: -12em -74em; }
+.icon-news-grey-xlight			{ background-position: -14em -74em; }
+.icon-news-white				{ background-position: -16em -74em; }
+
+/* Campaign */
+.icon-campaign					{ background-position:  0    -76em; }
+.icon-campaign-black			{ background-position: -2em  -76em; }
+.icon-campaign-blue-deep		{ background-position: -4em  -76em; }
+.icon-campaign-blue-light		{ background-position: -6em  -76em; }
+.icon-campaign-blue-xlight		{ background-position: -8em  -76em; }
+.icon-campaign-grey-deep		{ background-position: -10em -76em; }
+.icon-campaign-grey-light		{ background-position: -12em -76em; }
+.icon-campaign-grey-xlight		{ background-position: -14em -76em; }
+.icon-campaign-white			{ background-position: -16em -76em; }
+
+/* Bell */
+.icon-bell						{ background-position:  0    -78em; }
+.icon-bell-black				{ background-position: -2em  -78em; }
+.icon-bell-blue-deep			{ background-position: -4em  -78em; }
+.icon-bell-blue-light			{ background-position: -6em  -78em; }
+.icon-bell-blue-xlight			{ background-position: -8em  -78em; }
+.icon-bell-grey-deep			{ background-position: -10em -78em; }
+.icon-bell-grey-light			{ background-position: -12em -78em; }
+.icon-bell-grey-xlight			{ background-position: -14em -78em; }
+.icon-bell-white				{ background-position: -16em -78em; }
+
+/* Support */
+.icon-support					{ background-position:  0    -80em; }
+.icon-support-black				{ background-position: -2em  -80em; }
+.icon-support-blue-deep			{ background-position: -4em  -80em; }
+.icon-support-blue-light		{ background-position: -6em  -80em; }
+.icon-support-blue-xlight		{ background-position: -8em  -80em; }
+.icon-support-grey-deep			{ background-position: -10em -80em; }
+.icon-support-grey-light		{ background-position: -12em -80em; }
+.icon-support-grey-xlight		{ background-position: -14em -80em; }
+.icon-support-white				{ background-position: -16em -80em; }
+
+/* Accessories */
+.icon-accessories				{ background-position:  0    -82em; }
+.icon-accessories-black			{ background-position: -2em  -82em; }
+.icon-accessories-blue-deep		{ background-position: -4em  -82em; }
+.icon-accessories-blue-light	{ background-position: -6em  -82em; }
+.icon-accessories-blue-xlight	{ background-position: -8em  -82em; }
+.icon-accessories-grey-deep		{ background-position: -10em -82em; }
+.icon-accessories-grey-light	{ background-position: -12em -82em; }
+.icon-accessories-grey-xlight	{ background-position: -14em -82em; }
+.icon-accessories-white			{ background-position: -16em -82em; }
+
+/* Topics */
+.icon-topics					{ background-position:  0    -84em; }
+.icon-topics-black				{ background-position: -2em  -84em; }
+.icon-topics-blue-deep			{ background-position: -4em  -84em; }
+.icon-topics-blue-light			{ background-position: -6em  -84em; }
+.icon-topics-blue-xlight		{ background-position: -8em  -84em; }
+.icon-topics-grey-deep			{ background-position: -10em -84em; }
+.icon-topics-grey-light			{ background-position: -12em -84em; }
+.icon-topics-grey-xlight		{ background-position: -14em -84em; }
+.icon-topics-white				{ background-position: -16em -84em; }
+
+/* Q/A */
+.icon-q-a						{ background-position:  0    -86em; }
+.icon-q-a-black					{ background-position: -2em  -86em; }
+.icon-q-a-blue-deep				{ background-position: -4em  -86em; }
+.icon-q-a-blue-light			{ background-position: -6em  -86em; }
+.icon-q-a-blue-xlight			{ background-position: -8em  -86em; }
+.icon-q-a-grey-deep				{ background-position: -10em -86em; }
+.icon-q-a-grey-light			{ background-position: -12em -86em; }
+.icon-q-a-grey-xlight			{ background-position: -14em -86em; }
+.icon-q-a-white					{ background-position: -16em -86em; }
+
+/* Exchange */
+.icon-exchange					{ background-position:  0    -88em; }
+.icon-exchange-black			{ background-position: -2em  -88em; }
+.icon-exchange-blue-deep		{ background-position: -4em  -88em; }
+.icon-exchange-blue-light		{ background-position: -6em  -88em; }
+.icon-exchange-blue-xlight		{ background-position: -8em  -88em; }
+.icon-exchange-grey-deep		{ background-position: -10em -88em; }
+.icon-exchange-grey-light		{ background-position: -12em -88em; }
+.icon-exchange-grey-xlight		{ background-position: -14em -88em; }
+.icon-exchange-white			{ background-position: -16em -88em; }
+
+/* Bag */
+.icon-bag						{ background-position:  0    -90em; }
+.icon-bag-black					{ background-position: -2em  -90em; }
+.icon-bag-blue-deep				{ background-position: -4em  -90em; }
+.icon-bag-blue-light			{ background-position: -6em  -90em; }
+.icon-bag-blue-xlight			{ background-position: -8em  -90em; }
+.icon-bag-grey-deep				{ background-position: -10em -90em; }
+.icon-bag-grey-light			{ background-position: -12em -90em; }
+.icon-bag-grey-xlight			{ background-position: -14em -90em; }
+.icon-bag-white					{ background-position: -16em -90em; }
+
+/* Corner */
+.icon-corner					{ background-position:  0    -92em; }
+.icon-corner-black				{ background-position: -2em  -92em; }
+.icon-corner-blue-deep			{ background-position: -4em  -92em; }
+.icon-corner-blue-light			{ background-position: -6em  -92em; }
+.icon-corner-blue-xlight		{ background-position: -8em  -92em; }
+.icon-corner-grey-deep			{ background-position: -10em -92em; }
+.icon-corner-grey-light			{ background-position: -12em -92em; }
+.icon-corner-grey-xlight		{ background-position: -14em -92em; }
+.icon-corner-white				{ background-position: -16em -92em; }
+
+/* Circlearrows */
+.icon-circlearrows				{ background-position:  0    -94em; }
+.icon-circlearrows-black		{ background-position: -2em  -94em; }
+.icon-circlearrows-blue-deep	{ background-position: -4em  -94em; }
+.icon-circlearrows-blue-light	{ background-position: -6em  -94em; }
+.icon-circlearrows-blue-xlight	{ background-position: -8em  -94em; }
+.icon-circlearrows-grey-deep	{ background-position: -10em -94em; }
+.icon-circlearrows-grey-light	{ background-position: -12em -94em; }
+.icon-circlearrows-grey-xlight	{ background-position: -14em -94em; }
+.icon-circlearrows-white		{ background-position: -16em -94em; }
+
+/* Crosarrows */
+.icon-crosarrows				{ background-position:  0    -96em; }
+.icon-crosarrows-black			{ background-position: -2em  -96em; }
+.icon-crosarrows-blue-deep		{ background-position: -4em  -96em; }
+.icon-crosarrows-blue-light		{ background-position: -6em  -96em; }
+.icon-crosarrows-blue-xlight	{ background-position: -8em  -96em; }
+.icon-crosarrows-grey-deep		{ background-position: -10em -96em; }
+.icon-crosarrows-grey-light		{ background-position: -12em -96em; }
+.icon-crosarrows-grey-xlight	{ background-position: -14em -96em; }
+.icon-crosarrows-white			{ background-position: -16em -96em; }
+
+/* Langage */
+.icon-langage					{ background-position:  0    -98em; }
+.icon-langage-black				{ background-position: -2em  -98em; }
+.icon-langage-blue-deep			{ background-position: -4em  -98em; }
+.icon-langage-blue-light		{ background-position: -6em  -98em; }
+.icon-langage-blue-xlight		{ background-position: -8em  -98em; }
+.icon-langage-grey-deep			{ background-position: -10em -98em; }
+.icon-langage-grey-light		{ background-position: -12em -98em; }
+.icon-langage-grey-xlight		{ background-position: -14em -98em; }
+.icon-langage-white				{ background-position: -16em -98em; }
+
+/* Person */
+.icon-person					{ background-position:  0    -100em; }
+.icon-person-black				{ background-position: -2em  -100em; }
+.icon-person-blue-deep			{ background-position: -4em  -100em; }
+.icon-person-blue-light			{ background-position: -6em  -100em; }
+.icon-person-blue-xlight		{ background-position: -8em  -100em; }
+.icon-person-grey-deep			{ background-position: -10em -100em; }
+.icon-person-grey-light			{ background-position: -12em -100em; }
+.icon-person-grey-xlight		{ background-position: -14em -100em; }
+.icon-person-white				{ background-position: -16em -100em; }
+
+/* Print */
+.icon-print						{ background-position:  0    -102em; }
+.icon-print-black				{ background-position: -2em  -102em; }
+.icon-print-blue-deep			{ background-position: -4em  -102em; }
+.icon-print-blue-light			{ background-position: -6em  -102em; }
+.icon-print-blue-xlight			{ background-position: -8em  -102em; }
+.icon-print-grey-deep			{ background-position: -10em -102em; }
+.icon-print-grey-light			{ background-position: -12em -102em; }
+.icon-print-grey-xlight			{ background-position: -14em -102em; }
+.icon-print-white				{ background-position: -16em -102em; }
+
+/* Setup */
+.icon-setup						{ background-position:  0    -104em; }
+.icon-setup-black				{ background-position: -2em  -104em; }
+.icon-setup-blue-deep			{ background-position: -4em  -104em; }
+.icon-setup-blue-light			{ background-position: -6em  -104em; }
+.icon-setup-blue-xlight			{ background-position: -8em  -104em; }
+.icon-setup-grey-deep			{ background-position: -10em -104em; }
+.icon-setup-grey-light			{ background-position: -12em -104em; }
+.icon-setup-grey-xlight			{ background-position: -14em -104em; }
+.icon-setup-white				{ background-position: -16em -104em; }
+
+/* Info */
+.icon-info						{ background-position:  0    -106em; }
+.icon-info-black				{ background-position: -2em  -106em; }
+.icon-info-blue-deep			{ background-position: -4em  -106em; }
+.icon-info-blue-light			{ background-position: -6em  -106em; }
+.icon-info-blue-xlight			{ background-position: -8em  -106em; }
+.icon-info-grey-deep			{ background-position: -10em -106em; }
+.icon-info-grey-light			{ background-position: -12em -106em; }
+.icon-info-grey-xlight			{ background-position: -14em -106em; }
+.icon-info-white				{ background-position: -16em -106em; }
+
+/* repair */
+.icon-repair						{ background-position:  0    -110em; }
+.icon-repair-black				{ background-position: -2em  -110em; }
+.icon-repair-blue-deep			{ background-position: -4em  -110em; }
+.icon-repair-blue-light			{ background-position: -6em  -110em; }
+.icon-repair-blue-xlight			{ background-position: -8em  -110em; }
+.icon-repair-grey-deep			{ background-position: -10em -110em; }
+.icon-repair-grey-light			{ background-position: -12em -110em; }
+.icon-repair-grey-xlight			{ background-position: -14em -110em; }
+.icon-repair-white				{ background-position: -16em -110em; }
+
+/* Message-info */
+.icon-message-info				{ background-position:  0    -108em; }
+
+/* Message-alert */
+.icon-message-alert				{ background-position: -2em  -108em; }
+
+/* RSS */
+.icon-rss						{ background-position: -4em  -108em; }
+
+/* PDF */
+.icon-doc-pdf						{ background-position: -6em  -108em; }
+
+
+/* Social icons
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.social.icon					{ background-image: url('../images/social-icons.svg'); background-repeat: no-repeat;
+									background-size: 17em 7em; }
+.no-svg .social.icon			{ background-image: url('../images/social-icons@1x.png');
+									background-size: 255px 105px; }
+
+/* Sizes */
+.no-svg .social.icon-small		{ background-image: url('../images/social-icons@08x.png'); }
+.no-svg .social.icon-large		{ background-image: url('../images/social-icons@2x.png'); }
+.no-svg .social.icon-xlarge		{ background-image: url('../images/social-icons@4x.png'); }
+
+
+/* Facebook */
+.icon-facebook					{ background-position:  0    0; }
+.icon-facebook-black			{ background-position: -2em  0; }
+.icon-facebook-blue-deep		{ background-position: -4em  0; }
+.icon-facebook-blue-light		{ background-position: -6em  0; }
+.icon-facebook-blue-xlight		{ background-position: -8em  0; }
+.icon-facebook-grey-deep		{ background-position: -10em 0; }
+.icon-facebook-grey-light		{ background-position: -12em 0; }
+.icon-facebook-grey-xlight		{ background-position: -14em 0; }
+.icon-facebook-white			{ background-position: -16em 0; }
+
+/* Twitter */
+.icon-twitter					{ background-position:  0    -2em; }
+.icon-twitter-black				{ background-position: -2em  -2em; }
+.icon-twitter-blue-deep			{ background-position: -4em  -2em; }
+.icon-twitter-blue-light		{ background-position: -6em  -2em; }
+.icon-twitter-blue-xlight		{ background-position: -8em  -2em; }
+.icon-twitter-grey-deep			{ background-position: -10em -2em; }
+.icon-twitter-grey-light		{ background-position: -12em -2em; }
+.icon-twitter-grey-xlight		{ background-position: -14em -2em; }
+.icon-twitter-white				{ background-position: -16em -2em; }
+
+/* Youtube */
+.icon-youtube					{ background-position:  0    -4em; }
+.icon-youtube-black				{ background-position: -2em  -4em; }
+.icon-youtube-blue-deep			{ background-position: -4em  -4em; }
+.icon-youtube-blue-light		{ background-position: -6em  -4em; }
+.icon-youtube-blue-xlight		{ background-position: -8em  -4em; }
+.icon-youtube-grey-deep			{ background-position: -10em -4em; }
+.icon-youtube-grey-light		{ background-position: -12em -4em; }
+.icon-youtube-grey-xlight		{ background-position: -14em -4em; }
+.icon-youtube-white				{ background-position: -16em -4em; }
+
+/* mixi */
+.icon-mixi						{ background-position:  0    -6em; }
+.icon-mixi-black				{ background-position: -2em  -6em; }
+.icon-mixi-blue-deep			{ background-position: -4em  -6em; }
+.icon-mixi-blue-light			{ background-position: -6em  -6em; }
+.icon-mixi-blue-xlight			{ background-position: -8em  -6em; }
+.icon-mixi-grey-deep			{ background-position: -10em -6em; }
+.icon-mixi-grey-light			{ background-position: -12em -6em; }
+.icon-mixi-grey-xlight			{ background-position: -14em -6em; }
+.icon-mixi-white				{ background-position: -16em -6em; }
+

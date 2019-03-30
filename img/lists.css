@@ -1,0 +1,628 @@
+/* Title:       Lists’ stylesheet
+   Theme URI:   http://www.casio.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+
+/* Default lists
+─────────────────────────────────────────────────────────────────────────────────── */
+
+ul,
+ol {
+	list-style-position: outside;
+}
+ul {
+	padding-left: 5%;
+	padding-right: 2%;
+	list-style-type: disc;
+}
+ol {
+	padding-left: 6.5%;
+}
+.alphabet {
+	list-style-type: lower-alpha;
+}
+ul > li,
+ol > li {
+	margin-top: 1em;
+	padding-left: 2%;
+}
+li > ul {
+	margin-top: 1em;
+	padding-left: 10%;
+}
+li > ol {
+	margin-top: 1em;
+	padding-left: 11.5%;
+}
+
+.jp-cyrcle,
+.jp-bullet,
+.jp-diamond,
+.jp-square,
+.jp-triangle,
+.jp-triangle-down,
+.jp-middle-dot,
+.jp-num {
+	padding-left: 11%;
+	list-style-type: none;
+}
+.jp-num {
+	counter-reset: section;
+}
+.jp-cyrcle li,
+.jp-bullet li,
+.jp-diamond li,
+.jp-square li,
+.jp-triangle li,
+.jp-triangle-down li,
+.jp-middle-dot li,
+.jp-num li {
+	position: relative;
+	list-style-type: none;
+}
+
+.jp-cyrcle li:before,
+.jp-bullet li:before,
+.jp-diamond li:before,
+.jp-square li:before,
+.jp-triangle li:before,
+.jp-triangle-down li:before,
+.jp-middle-dot li:before,
+.jp-num li:before {
+	position: absolute;
+	left: -11%;
+	top: 0;
+}
+.jp-cyrcle li:before {
+	content: '\3007\00a0';
+}
+.jp-bullet li:before {
+	content: '\25cf\00a0';
+}
+.jp-diamond li:before {
+	content: '\25c7\00a0';
+}
+.jp-square li:before {
+	content: '\25a0\00a0';
+}
+.jp-triangle li:before {
+	content: '\25ba\00a0';
+}
+.jp-triangle-down li:before {
+	content: '\25bc\00a0';
+}
+.jp-middle-dot li:before {
+	content: '\30fb\00a0';
+}
+.jp-num li:before {
+	counter-increment: section;
+	content: "(" counter(section) ")\00a0";
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	ul {
+		padding-left: 2%;
+	}
+	li > ul {
+		padding-left: 5%;
+	}
+	ol {
+		padding-left: 2.5%;
+	}
+	li > ol {
+		padding-left: 6%;
+	}
+	.jp-cyrcle,
+	.jp-bullet,
+	.jp-diamond,
+	.jp-square,
+	.jp-triangle,
+	.jp-triangle-down,
+	.jp-middle-dot {
+		padding-left: 2%;
+	}
+	.jp-num {
+		padding-left: 2.5%;
+	}
+	.jp-cyrcle li:before,
+	.jp-bullet li:before,
+	.jp-diamond li:before,
+	.jp-square li:before,
+	.jp-triangle li:before,
+	.jp-triangle-down li:before,
+	.jp-middle-dot li:before,
+	.jp-num li:before {
+		left: -2%;
+	}
+}
+
+
+/* Date list
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.date-list dt {
+	margin-bottom: 0;
+}
+.date-list dd {
+	margin-bottom: 1em;
+}
+.date-list dd li {
+	margin-bottom: .75em;
+}
+.date-list dd p {
+	margin: 0 0 1em;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	.date-list dt {
+		float: left;
+		width: 8.333%;
+	}
+	.date-list dd {
+		margin-left: 8.333%;
+	}
+}
+
+
+/* QA list
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.qa abbr[title] {
+	border-bottom: none;
+}
+.qa abbr[title]:after {
+	content: ".";
+	color: #000;
+}
+.qa abbr[title="Question"] {
+	color: #c81d1d;
+}
+
+.qa dt {
+	font-weight: bold;
+}
+.qa dd {
+	margin-bottom: 1em;
+}
+.qa dd p {
+	margin-top: 0;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	.qa dt {
+		float: left;
+		margin-bottom: 1em;
+		width: 8.333%;
+	}
+	.qa dd {
+		margin-left: 8.333%;
+		margin-bottom: 1em;
+	}
+}
+
+
+/* Plain lists
+─────────────────────────────────────────────────────────────────────────────────── */
+
+ul.plain,
+ol.plain {
+	list-style-type: none;
+	padding-left: 0;
+}
+ul.plain li,
+ol.plain li {
+	padding: 0;
+}
+
+
+/* Tabs
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="tab-"] {
+	display: block;
+	width: 110%;
+	margin: 0 -5%;
+	padding: .8em 0 0;
+	background: #f5f5f5;
+}
+[class*="tab-"] li {
+	position: relative;
+	display: block;
+	margin-top: 0;
+	border: none;
+	width: 100%;
+	padding: 0;
+}
+[class*="tab-"] li button,
+[class*="tab-"] li.current button {
+	display: table;
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	margin: 0;
+	text-decoration: none;
+	color: #100d0d;
+	border: none;
+	background: #eaeaea;
+	border-top: 1px solid #d5d4d4;
+}
+[class*="tab-"] li.current button {
+	background: #fff;
+	border-top: none;
+}
+[class*="tab-"] li button span {
+	display: table-cell;
+	text-align: left;
+	padding: 1em;
+}
+[class*="tab-"] li.current button span:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	display: block;
+	content: "";
+	width: .133em;
+	height: 100%;
+	background: #003296;
+}
+[class*="tab-"] li.current:last-child {
+	border-bottom: 1px solid #d5d4d4;
+}
+
+.content-tab.hidden {
+	display: none;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	[class*="tab-"] {
+		position: relative;
+		display: table;
+		table-layout: fixed;
+		border-collapse: separate;
+		border-spacing: .26em 1px;
+		width: 104%;
+		margin: 0 -2%;
+		padding: 0;
+		background: #fff;
+	}
+
+	[class*="tab-"]:before {
+		content: "";
+		position: absolute;
+		left: .5em;
+		right: .15em;
+		bottom: 0;
+		z-index: 1;
+		height: 1px;
+		background: #d5d4d4;
+	}
+
+	[class*="tab-"] li {
+		display: table-cell;
+		width: auto;
+		padding: .5em .5em .45em;
+		text-align: center;
+		vertical-align: middle;
+		background: #f5f5f5;
+		border: solid #f5f5f5;
+		border-width: 1px 1px 0 1px;
+		cursor: pointer;
+	}
+	[class*="tab-"] li:hover,
+	[class*="tab-"] li:focus {
+		background: #eaeaea;
+	}
+
+	[class*="tab-"] li.current {
+		background: #fff;
+		border: 1px solid #d5d4d4;
+		border-bottom: 0 none;
+	}
+	[class*="tab-"] li.current:last-child {
+		border-bottom: none;
+	}
+	[class*="tab-"] li.current:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -1px;
+		z-index: 1;
+		display: block;
+		height: 1px;
+		background: #fff;
+	}
+	.tab-2 li {
+		width: 50%;
+	}
+	.tab-3 li {
+		width: 33%;
+	}
+	.tab-3 li:first-child {
+		width: 34%;
+	}
+	.tab-4 li {
+		width: 25%;
+	}
+	.tab-5 li {
+		width: 20%;
+	}
+
+	[class*="tab-"] li button {
+		display: inline;
+		border: none;
+		background: transparent;
+	}
+	[class*="tab-"] li.current button:before {
+		content: "";
+		position: absolute;
+		top: -10px;
+		left: -1px;
+		right: -1px;
+		bottom: 0;
+		z-index: 1;
+		display: block;
+		background: #fff;
+		border-top: 1px solid #d5d4d4;
+		border-left: 1px solid #d5d4d4;
+		border-right: 1px solid #d5d4d4;
+	}
+	[class*="tab-"] li.current button:after {
+		content: "";
+		position: absolute;
+		left: .33em;
+		top: auto;
+		right: .33em;
+		bottom: 0;
+		z-index: 1;
+		display: block;
+		width: auto;
+		height: .133em;
+		background: #003296;
+	}
+
+	[class*="tab-"] li button span {
+		position: relative;
+		z-index: 1;
+		display: inline;
+		padding: 0;
+		border: none;
+		background: transparent;
+	}
+	[class*="tab-"] li.current button span {
+		background: transparent;
+	}
+	[class*="tab-"] li.current button span:after {
+		content: none;
+	}
+}
+
+
+/* Anchor
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.anchor {
+	padding-top: 1em;
+	text-align: center;
+	font-size: .9em;
+}
+
+.anchor a,
+.anchor > span {
+	position: relative;
+	display: inline-block;
+	margin: 0 1.5em 1em;
+	text-decoration: none;
+	color: #606060;
+}
+.anchor a:before,
+.anchor > span:before {
+	position: absolute;
+	left: -1.8em;
+	top: 0;
+	display: inline-block;
+	content: "|";
+	vertical-align: bottom;
+}
+.anchor a:first-child:before,
+.anchor > span:first-child:before {
+	display: none;
+}
+.anchor a:hover:after,
+.anchor .current:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 2px;
+	background: #003296;
+}
+.anchor a:active {
+	color: #4065b0;
+}
+.anchor a:active:after {
+	display: none;
+}
+
+
+/* Anchor Tab
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.anchor.tab a:before,
+.anchor.tab > span:before {
+	color: #d7d7d7;
+}
+
+/* SP < 768px */
+@media print, screen and (max-width: 47.9em) {
+
+	.anchor.tab {
+		padding-top: 0;
+		border-top: .5em solid #f5f5f5;
+		border-bottom: .5em solid #f5f5f5;
+		margin-bottom: 2.5em;
+	}
+
+	/* Destroy */
+	.anchor.tab a:after,
+	.anchor.tab a:before,
+	.anchor.tab > span:after,
+	.anchor.tab > span:before {
+		content: none;
+	}
+
+	/* Icon */
+	.anchor.tab a .icon,
+	.anchor.tab > span .icon {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 3%;
+		margin: auto;
+		font-size: .935em;
+	}
+
+	/* Anchor */
+	.anchor.tab a,
+	.anchor.tab > span {
+		display: block;
+		padding: .9em 2em .9em 1em;
+		margin: 0;
+		font-size: 1.25em;
+		word-wrap: break-word;
+		text-align: left;
+		color: inherit;
+		background: #eaeaea;
+	}
+	.anchor.tab a,
+	.anchor.tab > span {
+		border-top: 1px solid #d5d4d4;
+	}
+	.anchor.tab a:first-child,
+	.anchor.tab > span:first-child {
+		border-top: none;
+	}
+
+	/* Current */
+	.anchor.tab a.current,
+	.anchor.tab > span.current {
+		color: #100d0d;
+		background: #fff;
+	}
+	.anchor.tab a.current:after,
+	.anchor.tab > span.current:after {
+		content: "";
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 2px;
+		height: auto;
+	}
+	.anchor.tab a.current .icon
+	.anchor.tab > span.current .icon {
+		display: none;
+	}
+
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	.anchor.tab {
+		margin: 2em 0;
+		padding-top: 0;
+		font-size: 1.07em;
+	}
+
+	/* under line */
+	.anchor.tab a:after,
+	.anchor.tab > span:after {
+		right: 0;
+		width: auto;
+	}
+
+
+	.anchor.tab a.current,
+	.anchor.tab > span.current {
+		font-weight: bold;
+		color: inherit;
+	}
+}
+
+
+/* Pagination
+─────────────────────────────────────────────────────────────────────────────────── */
+/* SP > 768px */
+@media print, screen and (max-width: 47.9em) {
+	.pagination {
+		padding: 1em 0;
+	}
+	#result-pagination .pagination {
+		padding-top: 0;
+	}
+}
+.pagination {
+	text-align: center;
+	font-size: .8em;
+}
+
+.pagination a,
+.pagination span {
+	position: relative;
+	display: inline-block;
+	margin: 0 0.67em 1em;
+	padding: 0 0.17em;
+	text-decoration: none;
+	color: #606060;
+}
+.pagination a:hover {
+	color: #003296;
+}
+.pagination a:active {
+	color: #c6c6c6;
+}
+
+.pagination .control {
+	margin: 0 0 1em;
+}
+
+.pagination a .icon,
+.pagination span .icon {
+	margin: 0;
+	padding: 0;
+}
+.pagination a .icon[class*="icon-ah-l"],
+.pagination span .icon[class*="icon-ah-l"] {
+	margin-right: 0.5em;
+}
+.pagination a .icon[class*="icon-ah-r"],
+.pagination span .icon[class*="icon-ah-r"] {
+	margin-left: 0.5em;
+}
+
+.pagination .current {
+	font-weight: bold;
+	color: #282828;
+}
+
+.pagination .current:before {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 2px;
+	background: #003296;
+}

@@ -1,0 +1,885 @@
+/**
+ * @fileOverview Control Main Navigation
+ *
+ * @author ZYYX Wakamatsu
+ * @version 1.0.0
+ */
+(function() {
+
+
+	var util = (function() {
+		return {
+			callFunction: function(func, arg) {
+				if('function' !== typeof func){
+					return;
+				}
+				func(arg);
+			},
+			addClass: function(el, className) {
+				if (!el || !className) {
+					return;
+				}
+				var classString = el.className,
+						nameIndex = classString.indexOf(className);
+				if (nameIndex === -1) {
+					classString = (classString === '') ? className : classString + ' ' + className;
+				}
+				el.className = classString;
+			},
+			removeClass: function(el, className) {
+				if (!el || !className) {
+					return;
+				}
+				var classString = el.className,
+						nameIndex = (classString) ? classString.indexOf(className) : -1;
+				if (-1 < nameIndex) {
+					var ary1 = classString.split(' '),
+							ary2 = [];
+					for (var a = 0; a < ary1.length; a++) {
+						var getClass = ary1[a];
+						if (getClass !== className && getClass !== '') {
+							ary2.push(getClass);
+						}
+					}
+					classString = ary2.join(' ');
+				}
+				el.className = classString;
+			}
+		};
+	})();
+
+	var handler = (function() {
+		var events = {},
+		key = 0;
+
+		return {
+			addListener: function(target, type, listener, capture) {
+				if (window.addEventListener) {
+						target.addEventListener(type, listener, capture);
+				} else if (window.attachEvent) {
+						target.attachEvent('on' + type, listener);
+				}
+				events[key] = {
+					target: target,
+					type: type,
+					listener: listener,
+					capture: capture
+				};
+				return key ++;
+			},
+			removeListener: function(key) {
+				if(key in events) {
+					var e = events[key];
+					if (window.removeEventListener) {
+						e.target.removeEventListener(e.type, e.listener, e.capture);
+					} else if (window.detachEvent) {
+						e.target.detachEvent('on' + e.type, e.listener);
+					}
+				}
+			}
+		};
+	})();
+
+
+	window.isIE = false;
+	window.ieVersion = null;
+	var userAgent = window.navigator.userAgent.toLowerCase();
+	if (userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/)) {
+		isIE = true;
+		ieVersion = userAgent.match(/((msie|MSIE)\s|rv:)([\d\.]+)/)[3];
+		ieVersion = parseInt(ieVersion);
+	}
+
+	var ResizeMenu = function() {
+		this.initialize();
+	};
+	ResizeMenu.prototype.initialize = function() {
+		this.evtKey = {};
+		this.dom = {
+			body: document.querySelector('body'),
+			nav: document.querySelector('#global-navigation'),
+			product: {},
+			header: document.querySelector('body > header')
+		};
+		this.displayMode = null;
+	};
+	ResizeMenu.prototype.setInactive = function(ary) {
+		var a = 0,
+				len = ary.length;
+		for (a; a < len; a++) {
+			var item = ary[a];
+			util.addClass(item, 'inactive');
+		}
+	};
+	ResizeMenu.prototype.removeInactive = function(ary) {
+		var a = 0,
+				len = ary.length;
+		for (a; a < len; a++) {
+			var item = ary[a];
+			util.removeClass(item, 'inactive');
+		}
+	};
+	ResizeMenu.prototype.resizeMenuWidth = function(w, max, ary) {
+		var a = 0,
+				len = ary.length;
+		for (a; a < len; a++) {
+			var item = ary[a];
+			if (w + item.offsetWidth < max) {
+				util.removeClass(item, 'inactive');
+				util.removeClass(item, 'no-border');
+				w = w + item.offsetWidth;
+			} else {
+				break;
+			}
+		}
+		return w;
+	};
+	ResizeMenu.prototype.setHeightAndPosition = function(arg) {
+		if (arg.max === undefined) {
+			arg.max = 0;
+		}
+		if (arg.node === undefined) {
+			return arg.max;
+		}
+
+		var a = 0,
+				len = arg.node.length,
+				aryH = [0, 0],
+				maxH = 0;
+		for (a; a < len; a++) {
+			var item = arg.node[a];
+			var w = item.offsetWidth,
+					h = item.offsetHeight;
+			if (aryH[0] <= aryH[1]) {
+				item.style.left = 0;
+				item.style.top = aryH[0] + 'px';
+				aryH[0] = aryH[0] + h;
+			} else {
+				item.style.left = w + 'px';
+				item.style.top = aryH[1] + 'px';
+				aryH[1] = aryH[1] + h;
+			}
+		}
+		maxH = (aryH[0] <= aryH[1]) ? aryH[1] : aryH[0];
+		if (arg.max < maxH) {
+			return maxH;
+		} else {
+			return arg.max;
+		}
+	};
+	ResizeMenu.prototype.setHoverEvent = function(arg, callback) {
+		var _self = this;
+
+		if (arg.isblur === undefined) {
+			arg.isblur = true;
+		}
+
+		var overMenu = null,
+				outMenu = null,
+				outTimer = null,
+				interval = (arg.interval) ? arg.interval : 100;
+
+		var menu = arg.obj.querySelectorAll(arg.tagSelector);
+		var a = 0,
+				aLen = menu.length,
+				aKeys = [];
+
+		var prevEl = null,
+				newEl = null,
+				subEl = null;
+
+		for (a; a < aLen; a++) {
+			var aMenu = menu[a];
+			aKeys[a] = {};
+
+			var mouseOverEvent = function(el) {
+
+				if (_self.displayMode === 'pc') {
+
+					//console.log(el.className);
+
+					if ((el.className.indexOf('btn-more') === -1 && _self.touchEvent) && (el.className.indexOf('btn-search') === -1 && _self.touchEvent)) {
+						return;
+					}
+
+					if (!overMenu && !outMenu) {
+						var a2 = 0,
+								a2Len = menu.length,
+								isLock = false;
+						for (a2; a2 < a2Len; a2++) {
+							var a2Menu = menu[a2],
+									getClass = a2Menu.className;
+							if (-1 < getClass.indexOf('hover')) {
+								if (a2Menu !== el) {
+									if (-1 < getClass.indexOf('btn-search') && -1 < getClass.indexOf('js-hover-lock')) {
+										isLock = true;
+									} else {
+										util.removeClass(a2Menu, 'hover');
+									}
+								}
+							}
+						}
+						if (!isLock) {
+							if (el.className.indexOf('hover') === -1) {
+								util.addClass(el, 'hover');
+							}
+							util.callFunction(callback, { obj: el });
+						}
+					}
+					overMenu = el;
+				}
+			};
+
+			var mouseOutEvent = function(el) {
+				if (_self.displayMode === 'pc') {
+
+					if ((el.className.indexOf('btn-more') === -1 && _self.touchEvent) && (el.className.indexOf('btn-search') === -1 && _self.touchEvent)) {
+						return;
+					}
+
+					if (!outMenu) {
+						outMenu = el;
+					}
+
+					if (outTimer) {
+						clearTimeout(outTimer);
+						outTimer = null;
+					}
+					outTimer = setTimeout(function(obj) {
+						if (obj !== overMenu) {
+							var hoverMenu = arg.obj.querySelectorAll(arg.hoverSelector);
+							var a2 = 0,
+									a2Len = hoverMenu.length;
+							for (a2; a2 < a2Len; a2++) {
+								var a2Menu = hoverMenu[a2],
+										a2Class = a2Menu.className;
+								if (a2Class.indexOf('js-hover-lock') === -1) {
+									if (arg.isblur || (!arg.isblur && overMenu)) {
+										var isRemove = true;
+										if (-1 < a2Class.indexOf('product')) {
+											if (_self.dom.product.wrapper) {
+												if (_self.dom.product.wrapper.className.indexOf('hidden') === -1) {
+													isRemove = false;
+												}
+											}
+										}
+										if (isRemove) {
+											util.removeClass(a2Menu, 'hover');
+										}
+									}
+								} else {
+									overMenu = null;
+								}
+							}
+							outMenu = null;
+
+							if (overMenu) {
+								if (overMenu.className.indexOf('hover') === -1) {
+									var brotherNode = overMenu.parentNode.children;
+									var a2 = 0,
+											a2Len = brotherNode.length;
+									for (a2; a2 < a2Len; a2++) {
+										util.removeClass(brotherNode[a2], 'hover');
+									}
+									util.addClass(overMenu, 'hover');
+								}
+								util.callFunction(callback, { obj: overMenu });
+							}
+						}
+					}, interval, outMenu);
+					overMenu = null;
+				}
+			};
+
+
+			handler.removeListener(parseInt(aKeys[a].key1));
+			handler.removeListener(parseInt(aKeys[a].key2));
+			handler.removeListener(parseInt(aKeys[a].key3));
+			handler.removeListener(parseInt(aKeys[a].key4));
+
+
+			var targetA = aMenu.querySelector('a');
+			aKeys[a].key1 = handler.addListener(targetA, 'focus', (function(el) {
+				return function() {
+
+					if (prevEl) {
+						mouseOutEvent	(prevEl);
+					}
+
+					mouseOverEvent(el);
+
+					prevEl = el;
+					newEl = el;
+					subEl = null;
+				};
+			})(aMenu), false);
+
+			aKeys[a].key2 = handler.addListener(targetA, 'blur', (function(el) {
+				return function() {
+					setTimeout(function() {
+
+						if (!subEl && !newEl && !subEl) {
+							mouseOutEvent(el);
+						}
+					}, 250);
+					newEl = null;
+				};
+			})(aMenu), false);
+
+			var aSubMenu = aMenu.querySelectorAll('.sub-navigation a');
+			if (0 < aSubMenu.length) {
+				for (var a3 = 0; a3 < aSubMenu.length; a3++) {
+					var thisMene = aSubMenu[a3];
+
+					handler.addListener(thisMene, 'focus', (function(el) {
+						return function() {
+//														console.log('sub', 'focus', el);
+							subEl = el;
+						};
+					})(thisMene), false);
+
+					handler.addListener(thisMene, 'blur', (function(el) {
+						return function() {
+							subEl = null;
+						};
+					})(thisMene), false);
+				}
+			}
+
+			var aSubInput = aMenu.querySelectorAll('.sub-navigation input');
+			if (0 < aSubInput.length) {
+				for (var a3 = 0; a3 < aSubInput.length; a3++) {
+					var thisInput = aSubInput[a3];
+
+					handler.addListener(thisInput, 'focus', (function(el) {
+						return function() {
+//														console.log('sub', 'focus', el);
+							subEl = el;
+						};
+					})(thisInput), false);
+
+					handler.addListener(thisInput, 'blur', (function(el) {
+						return function() {
+							subEl = null;
+						};
+					})(thisInput), false);
+				}
+			}
+
+			var aSubBtn = aMenu.querySelectorAll('.sub-navigation button');
+			if (0 < aSubBtn.length) {
+				for (var a3 = 0; a3 < aSubBtn.length; a3++) {
+					var thisBtn = aSubBtn[a3];
+
+					handler.addListener(thisBtn, 'focus', (function(el) {
+						return function() {
+	//														console.log('sub', 'focus', el);
+							subEl = el;
+						};
+					})(thisBtn), false);
+
+					handler.addListener(thisBtn, 'blur', (function(el) {
+						return function() {
+
+							setTimeout(function() {
+
+									//console.log('prevEl: ', prevEl, ', newEl: ', newEl, ', subEl: ', subEl);
+
+								if (!subEl && !newEl && !subEl) {
+									mouseOutEvent(el);
+								}
+							}, 250);
+
+							subEl = null;
+						};
+					})(thisBtn), false);
+				}
+			}
+
+/*
+			var aSubInput = aMenu.querySelectorAll('.sub-navigation input');
+			var aSubBtn = aMenu.querySelectorAll('.sub-navigation button');
+			if (0 < aSubInput.length) {
+				for (var a3 = 0; a3 < aSubMenu.length; a3++) {
+					var thisInput = aSubForm[a3];
+
+					handler.addListener(thisForm, 'focus', (function(el) {
+						return function() {
+//														console.log('sub', 'focus', el);
+							subEl = el;
+						};
+					})(thisMene), false);
+
+					handler.addListener(thisMene, 'blur', (function(el) {
+						return function() {
+							subEl = null;
+						};
+					})(thisMene), false);
+				}
+			}
+*/
+
+/*
+			handler.addListener(targetA, 'blur', (function(el) {
+				return function() {
+					mouseOutEvent	(el);
+				};
+			})(aMenu), false);
+*/
+
+			aKeys[a].key3 = handler.addListener(aMenu, 'mouseover', (function(el) {
+				return function() {
+					mouseOverEvent(el);
+
+/*
+					if (_self.displayMode === 'pc') {
+
+						if (!overMenu && !outMenu) {
+							var a2 = 0,
+									a2Len = menu.length,
+									isLock = false;
+							for (a2; a2 < a2Len; a2++) {
+								var a2Menu = menu[a2],
+										getClass = a2Menu.className;
+								if (-1 < getClass.indexOf('hover')) {
+									if (a2Menu !== el) {
+										if (-1 < getClass.indexOf('btn-search') && -1 < getClass.indexOf('js-hover-lock')) {
+											isLock = true;
+										} else {
+											util.removeClass(a2Menu, 'hover');
+										}
+									}
+								}
+							}
+							if (!isLock) {
+								if (el.className.indexOf('hover') === -1) {
+									util.addClass(el, 'hover');
+								}
+								util.callFunction(callback, { obj: el });
+							}
+						}
+						overMenu = el;
+					}
+*/
+				};
+			})(aMenu), false);
+
+			aKeys[a].key4 = handler.addListener(aMenu, 'mouseout', (function(el) {
+				return function() {
+					mouseOutEvent(el);
+/*
+					if (_self.displayMode === 'pc') {
+
+						if (!outMenu) {
+							outMenu = el;
+						}
+
+						if (outTimer) {
+							clearTimeout(outTimer);
+							outTimer = null;
+						}
+						outTimer = setTimeout(function(obj) {
+							if (obj !== overMenu) {
+								var hoverMenu = arg.obj.querySelectorAll(arg.hoverSelector);
+								var a2 = 0,
+										a2Len = hoverMenu.length;
+								for (a2; a2 < a2Len; a2++) {
+									var a2Menu = hoverMenu[a2],
+											a2Class = a2Menu.className;
+									if (a2Class.indexOf('js-hover-lock') === -1) {
+										if (arg.isblur || (!arg.isblur && overMenu)) {
+											var isRemove = true;
+											if (-1 < a2Class.indexOf('product')) {
+												if (_self.dom.product.wrapper) {
+													if (_self.dom.product.wrapper.className.indexOf('hidden') === -1) {
+														isRemove = false;
+													}
+												}
+											}
+											if (isRemove) {
+												util.removeClass(a2Menu, 'hover');
+											}
+										}
+									} else {
+										overMenu = null;
+									}
+								}
+								outMenu = null;
+
+								if (overMenu) {
+									if (overMenu.className.indexOf('hover') === -1) {
+										var brotherNode = overMenu.parentNode.children;
+										var a2 = 0,
+												a2Len = brotherNode.length;
+										for (a2; a2 < a2Len; a2++) {
+											util.removeClass(brotherNode[a2], 'hover');
+										}
+										util.addClass(overMenu, 'hover');
+									}
+									util.callFunction(callback, { obj: overMenu });
+								}
+							}
+						}, interval, outMenu);
+						overMenu = null;
+					}
+*/
+				};
+			})(aMenu), false);
+		}
+	};
+
+	ResizeMenu.prototype.setLayout = function() {
+		var _self = this,
+				_dom = _self.dom;
+
+		var i, iLen;
+
+		if (_self.displayMode === 'pc') {
+
+			var priority1 = _dom.nav.querySelectorAll('.priority-1st'),
+					priority2 = _dom.nav.querySelectorAll('.priority-2nd');
+
+			var btnMore = _dom.nav.querySelector('.btn-more'),
+					btnSearch = _dom.nav.querySelector('.btn-search');
+
+			_self.removeInactive(priority1);
+			_self.removeInactive(priority2);
+			_self.setInactive([btnMore]);
+
+			var menuW = 0;
+			for (var c = 0; c < priority1.length; c ++) {
+				menuW += priority1[c].offsetWidth;
+			}
+			for (var c = 0; c < priority2.length; c ++) {
+				menuW += priority2[c].offsetWidth;
+			}
+			menuW += btnSearch.offsetWidth
+
+			var menuMaxW = _dom.header.querySelector('.column').offsetWidth - _dom.header.querySelector('.casio-logo').offsetWidth;
+
+			if (menuMaxW < menuW) {
+
+				util.removeClass(btnMore, 'inactive');
+
+				_self.setInactive(priority1);
+				_self.setInactive(priority2);
+
+				var w = btnMore.offsetWidth + btnSearch.offsetWidth;
+
+				w = _self.resizeMenuWidth(w, menuMaxW, priority1);
+				w = _self.resizeMenuWidth(w, menuMaxW, priority2);
+
+				var allMenu = _dom.nav.querySelectorAll('.priority-1st, .priority-2nd');
+				var showMenu = [];
+				i = 0,
+				iLen = allMenu.length;
+				for (i; i < iLen; i++) {
+					if (-1 == allMenu[i].className.indexOf('inactive')) {
+						showMenu.push(allMenu[i]);
+					}
+				}
+
+				var lastMenu = showMenu[showMenu.length - 1];
+				util.addClass(lastMenu, 'no-border');
+
+				var hiddenMenu = _dom.nav.querySelectorAll('.priority-1st.inactive, .priority-2nd.inactive'),
+						targetMenu = btnMore.querySelector('ul');
+
+				targetMenu.innerHTML = '';
+
+				i = 0,
+				iLen = hiddenMenu.length;
+				var maxW = 0;
+				for (i; i < iLen; i++) {
+					var baseNode = hiddenMenu[i],
+							cloneNode = baseNode.cloneNode(true);
+					cloneNode.className = '';
+
+					var baseW = baseNode.querySelector('a').offsetWidth;
+
+					if (maxW < baseW) {
+						maxW = baseW;
+					}
+
+					var icon = document.createElement('span');
+					icon.className = 'icon icon-small icon-ah-thin-r-grey-light';
+					icon.setAttribute('aria-hidden', 'true');
+					cloneNode.children[0].appendChild(icon);
+
+					targetMenu.appendChild(cloneNode);
+				}
+
+				var reGetMenu = targetMenu.querySelectorAll('li > a');
+				i = 0,
+				iLen = reGetMenu.length;
+				for (i; i < iLen; i++) {
+					reGetMenu[i].style.width = maxW + 'px';
+				}
+			}
+		}
+	};
+
+	ResizeMenu.prototype.setEvent = function(mode) {
+		var _self = this,
+				_dom = _self.dom,
+				_pDom = _dom.product;
+
+		var i, iLen;
+
+		if (mode === 'pc') {
+
+			var interval1 = 50, interval2 = 400;
+			if (isIE && ieVersion === 8) {
+				interval1 = 0;
+				interval2 = 0;
+			}
+
+/*
+			if (!_pDom.wrapper) {
+				_pDom.wrapper = document.createElement('div');
+				_pDom.wrapper.setAttribute('id', 'products-navigation');
+				_pDom.wrapper.className = 'hidden';
+				_pDom.wrapper.innerHTML = '<div id="products-navigation-frame" class="frame grid--2"><div class="column"></div><div class="column column-2nd"><h3 class="hidden">カテゴリTOP</h3><div></div></div></div>';
+//        _dom.body.insertBefore(_pDom.wrapper, document.querySelector('main'));
+				_dom.body.appendChild(_pDom.wrapper);
+
+				_pDom.frame = _pDom.wrapper.querySelector('#products-navigation .frame');
+				_pDom.column = {};
+				_pDom.column.products = _pDom.frame.querySelectorAll('.column')[0];
+				_pDom.column.category = _pDom.frame.querySelectorAll('.column')[1];
+
+				if (isIE && ieVersion === 8) {
+					util.addClass(_pDom.wrapper, 'solid');
+					var obj = _dom.nav.querySelector('.main-navigation > li.product');
+					_self.setProductList(obj);
+				} else {
+					if ('ontouchstart' in window) {
+						util.addClass(_dom.nav, 'js-touchavailable');
+					}
+				}
+			}
+*/
+			_self.setHoverEvent({ obj : _dom.nav, tagSelector: '.main-navigation > li', hoverSelector: '.main-navigation > li.hover', interval: interval1 }, function(param) {
+				var b, bLen;
+				var paramClass = param.obj.className;
+				if (-1 < paramClass.indexOf('btn-search')) {
+					util.addClass(_pDom.wrapper, 'hidden');
+
+					var input = param.obj.querySelector('input');
+
+					var checkClick = function(e) {
+						var nowNode = e.target;
+						if (!nowNode) {
+							nowNode = e.srcElement;
+						}
+
+						var isCheck = true,
+								isKeep = false;
+
+						if (nowNode.className) {
+							if (-1 < nowNode.className.indexOf('search sub-navigation') || -1 < nowNode.className.indexOf('btn-search')) {
+								isCheck = false;
+								isKeep = true;
+							}
+						}
+
+						while(isCheck) {
+							var node = nowNode.parentNode;
+							if (-1 < node.className.indexOf('search sub-navigation') || -1 < node.className.indexOf('btn-search')) {
+								isCheck = false;
+								isKeep = true;
+							} else if (node.tagName.toLowerCase() === 'body') {
+								isCheck = false;
+							} else {
+								nowNode = node;
+							}
+						}
+
+						if (!isKeep) {
+							util.removeClass(param.obj, 'hover');
+							handler.removeListener(_self.evtKey.bodyClick);
+						}
+					};
+
+					var focusLock = function(e) {
+						if (e.type === 'focus') {
+							util.addClass(param.obj, 'js-hover-lock');
+
+							handler.removeListener(_self.evtKey.bodyClick);
+							_self.evtKey.bodyClick = handler.addListener(_dom.body, 'click', (function() {
+								return function(e) {
+									checkClick(e);
+								};
+							})(), false);
+
+						} else {
+							util.removeClass(param.obj, 'js-hover-lock');
+
+							handler.removeListener(_self.evtKey.searchFocus);
+							handler.removeListener(_self.evtKey.searchBlur);
+						}
+					};
+
+					handler.removeListener(_self.evtKey.searchFocus);
+					handler.removeListener(_self.evtKey.searchBlur);
+
+					_self.evtKey.searchFocus = handler.addListener(input, 'focus', (function() {
+						return function(e) {
+							focusLock(e);
+						};
+					})(), false);
+
+					_self.evtKey.searchBlur = handler.addListener(input, 'blur', (function() {
+						return function(e) {
+							focusLock(e);
+						};
+					})(), false);
+				} else {
+					util.addClass(_pDom.wrapper, 'hidden');
+
+					var lockMenu = null,
+							allLockMenu = _dom.nav.querySelectorAll('.main-navigation > li.js-hover-lock');
+					i = 0;
+					iLen = allLockMenu.length;
+					for (i; i < iLen; i++) {
+						var thisMenu = allLockMenu[i];
+						if (thisMenu.className.indexOf('.btn-search') === -1) {
+							lockMenu = thisMenu;
+							break;
+						}
+					}
+					if (lockMenu) {
+						util.removeClass(lockMenu, 'js-hover-lock');
+					}
+				}
+			});
+			util.addClass(_pDom.wrapper, 'hidden');
+
+		} else {
+
+			var menu = document.querySelector('#btn-menu'),
+					close = document.querySelector('#btn-close');
+
+//			var objA = _dom.body.querySelectorAll('.main-navigation li > span, .main-navigation li > a');
+			var objA = _dom.body.querySelectorAll('.js-toggle-head');
+
+			if (!_self.evtKey.toggleParent) {
+				_self.evtKey.toggleParent = [];
+			}
+			if (!_self.evtKey.toggleChild) {
+				_self.evtKey.toggleChild = [];
+			}
+
+			i = 0;
+			iLen = objA.length;
+
+			for (i; i < iLen; i++) {
+				var parent = objA[i].parentNode;
+				var children = parent.children;
+				for (var j = 0; j < children.length; j++) {
+					if (children[j].className) {
+						if (-1 < children[j].className.indexOf('sub-navigation') && parent.className.indexOf('btn-search') === -1 && parent.className.indexOf('btn-more') === -1) {
+							util.addClass(parent, 'js-toggle');
+
+							handler.removeListener(_self.evtKey.toggleParent[i]);
+							_self.evtKey.toggleParent[i] = handler.addListener(objA[i], 'click', (function(el) {
+								return function(e) {
+									e.stopPropagation();
+									if (-1 < el.className.indexOf('js-open')) {
+										util.removeClass(el, 'js-open');
+									} else {
+										util.addClass(el, 'js-open');
+									}
+								};
+							})(parent), false);
+
+							break;
+						}
+					}
+				}
+			}
+
+			var touchEventListener = function(e) {
+
+				e.preventDefault();
+				util.removeClass(_dom.body, 'open');
+				_self.dom.body.removeChild(_self.dom.coverBody);
+				_self.dom.coverBody = null;
+
+				handler.removeListener(_self.evtKey.coverBody);
+			};
+
+			handler.removeListener(_self.evtKey.touchBtnMenu);
+			_self.evtKey.touchBtnMenu = handler.addListener(menu, 'click', (function() {
+				return function() {
+
+					if (!_self.dom.coverBody) {
+						_self.dom.coverBody = document.createElement('div');
+						_self.dom.coverBody.setAttribute('id', 'cover-body');
+						_self.dom.coverBody.className = 'cover-body';
+						_self.dom.body.appendChild(_self.dom.coverBody);
+					}
+
+					handler.removeListener(_self.evtKey.coverBody);
+					_self.evtKey.coverBody = handler.addListener(_self.dom.coverBody, ('ontouchstart' in window) ? 'touchstart' : 'click', (function() {
+						return function(e) {
+							touchEventListener(e);
+						};
+					})(), false);
+
+					util.addClass(_dom.body, 'open');
+
+				};
+			})(), false);
+
+			handler.removeListener(_self.evtKey.touchBtnClose);
+			_self.evtKey.touchBtnClose = handler.addListener(close, 'click', (function() {
+				return function() {
+					util.removeClass(_dom.body, 'open');
+					for (var j = 0; j < keys.length; j++) {
+						handler.removeListener(_self.evtKey[keys[j].key]);
+					}
+				};
+			})(), false);
+
+		}
+	};
+
+	ResizeMenu.prototype.set = function() {
+		var _self = this;
+
+		var displayMode;
+
+		if (Modernizr.mq("screen and (max-width: 47.9em)")) {
+			displayMode = 'sp';
+		} else {
+			displayMode = 'pc';
+		}
+
+		if (_self.displayMode !== displayMode) {
+			_self.setEvent(displayMode);
+		}
+		_self.displayMode = displayMode;
+
+		_self.touchEvent = ('ontouchstart' in window);
+
+		_self.setLayout();
+	};
+
+	var rm = new ResizeMenu();
+	rm.set();
+
+	handler.addListener(window, 'resize', (function() {
+		return function() {
+			if (!this.width) {
+				this.width = 0;
+			}
+			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			if (this.width !== w) {
+				this.width = w;
+				rm.set();
+			}
+		};
+	})(), false);
+
+}).call(this);

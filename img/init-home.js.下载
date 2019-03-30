@@ -1,0 +1,42 @@
+$('.main-slider-slick').slick({
+	autoplay: true,
+	dots: true,
+	fade: true,
+	autoplaySpeed: 7000,
+	speed: 800,
+	pauseOnDotsHover: false,
+	pauseOnHover: false
+});
+ 
+var stopBtn = $('<a id="tglBtn"><img src="/assets/images/icon_slider_start_white.png" id="startBtn"><img src="/assets/images/icon_slider_stop_white.png" id="stopBtn"></a>');
+stopBtn.prependTo('.add_btn_area');
+
+$('#startBtn').hide();
+
+var flg = "play";
+
+$('#tglBtn').click(function(){
+	$('#startBtn').toggle();
+	if(flg == "play") {
+		$('#startBtn').show();
+		$('#stopBtn').hide();
+		flg = "stop";
+		$('.main-slider-slick').slick('slickPause');
+	} else {
+		$('#startBtn').hide();
+		$('#stopBtn').show();
+		flg = "play";
+		$('.main-slider-slick').slick('slickPlay');
+	}
+});
+
+$('.main-img-list').insertAfter('.main-slider-slick');
+
+document.addEventListener("visibilitychange", handler);
+function handler() {
+	if (document.visibilityState == "visible") {
+	    $('#startBtn').hide();
+		$('#stopBtn').show();
+		flg = "play";
+	}
+}

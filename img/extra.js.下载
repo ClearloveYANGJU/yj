@@ -1,0 +1,528 @@
+function setcookie(cookieName, cookieValue, seconds, path, domain, secure) {
+	var expires = new Date();
+	expires.setTime(expires.getTime() + seconds);
+	document.cookie = escape(cookieName) + '=' + escape(cookieValue)
+	+ (expires ? '; expires=' + expires.toGMTString() : '')
+	+ (path ? '; path=' + path : '/')
+	+ (domain ? '; domain=' + domain : '')
+	+ (secure ? '; secure' : '');
+}
+
+function getcookie(name) {
+	var cookie_start = document.cookie.indexOf(name);
+	var cookie_end = document.cookie.indexOf(";", cookie_start);
+	return cookie_start == -1 ? '' : unescape(document.cookie.substring(cookie_start + name.length + 1, (cookie_end > cookie_start ? cookie_end : document.cookie.length)));
+}
+
+function getQueryString(name)
+{
+    // 如果链接没有参数，或者链接中不存在我们要获取的参数，直接返回空
+    if(location.href.indexOf("?")==-1 || location.href.indexOf(name+'=')==-1)
+    {
+        return '';
+    }
+ 
+    // 获取链接中参数部分
+    var queryString = location.href.substring(location.href.indexOf("?")+1);
+ 
+    // 分离参数对 ?key=value&key2=value2
+    var parameters = queryString.split("&");
+ 
+    var pos, paraName, paraValue;
+    for(var i=0; i<parameters.length; i++)
+    {
+        // 获取等号位置
+        pos = parameters[i].indexOf('=');
+        if(pos == -1) { continue; }
+ 
+        // 获取name 和 value
+        paraName = parameters[i].substring(0, pos);
+        paraValue = parameters[i].substring(pos + 1);
+ 
+        // 如果查询的name等于当前name，就返回当前值，同时，将链接中的+号还原成空格
+        if(paraName == name)
+        {
+            return unescape(paraValue.replace(/\+/g, " "));
+        }
+    }
+    return '';
+};
+
+function checkIE8AndRedirect(extra_url)
+{
+	if(typeof(extra_url)=='undefined') extra_url = '';
+	if(!extra_url) return;
+	
+	//this is IE 6-8
+	if ($.support.leadingWhitespace) {
+		return;
+	}
+	
+	var url = window.location.href;	
+	if(url.indexOf('?')>=0){
+		url = url+'&'+extra_url;
+	}else{
+		url = url+'?'+extra_url;
+	}
+	window.location.href = url;
+	return;
+}
+
+function checkIE7AndNotice()
+{
+	var browser=navigator.appName 
+	var b_version=navigator.appVersion 
+	var version=b_version.split(";"); 
+	if(typeof(version[1])!='undefined'){
+		var trim_Version=version[1].replace(/[ ]/g,""); 
+	}else{
+		var trim_Version=''
+	}
+	var show_notice = false;
+	if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE6.0") 
+	{ 
+		//alert("IE 6.0"); 
+		show_notice = true;
+	} 
+	else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0") 
+	{ 
+		//alert("IE 7.0");
+		show_notice = true;
+	} 
+	
+	if(show_notice){
+		$('<section class="grid-w-1 grid--1" style="margin-top:0px;"><p class="alert" style="text-align:center;">	<span class="t-size-large">您的浏览器版本较低。请升级到IE8以上版本或关闭IE兼容模式，以获得更佳的浏览效果。</span></p></section>').insertAfter($('#global-navigation'));
+	}
+}
+
+function supportMapInit(){
+	$('#map').css('height',$('#storeList').css('height'));
+	
+	map = new BMap.Map('map');
+	map.enableScrollWheelZoom();
+	       
+	var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});
+	var top_left_navigation = new BMap.NavigationControl();
+	var geolocationControl = new BMap.GeolocationControl();
+	map.addControl(geolocationControl);
+	map.addControl(top_left_control);        
+	map.addControl(top_left_navigation);
+		
+	var myCity = new BMap.LocalCity();
+	myCity.get(myCityFound);
+}
+
+
+function myCityFound(result){
+	var cityName = result.name;
+	//for(i in result){
+	//	console.log(i+'='+result[i]);
+	//}
+	//console.log(result.center);//point
+	map.centerAndZoom(cityName, 11);
+	setTimeout(function(){$('#storeMap').css('visibility','visible')},400);
+	
+	myCityFoundAfter(result.center,cityName);	
+}
+
+function myCityFoundCheck()
+{
+	if($('#storeMap').css('visibility')!='visible'){
+		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+		$('#storeMap').css('visibility','visible');
+	}
+}
+function myCityFoundAfter(pt,city_name)
+{
+	var myGeo = new BMap.Geocoder(); 
+	myGeo.getLocation(pt, function (rs) { 
+		var addComp = rs.addressComponents; 
+		//alert(addComp.province);
+		var province_name = addComp.province;
+		
+		
+		myCityFoundAfterProvince(province_name,city_name);		
+	}); 
+}
+
+function myCityFoundAfterProvince(province_name,city_name)
+{
+	$('.province_label_div label').each(function(){
+		var pname = $(this).find('span.province_span');
+		if(province_name.indexOf(pname.html())>=0){
+			$(this).find('input').prop("checked", true);
+			provincesClick('nosub');
+			$(this).find('span.outter').addClass('current');
+			return false;		
+		}
+	});
+	$('.province_label_div_sp label').each(function(){
+		var pname = $(this).find('span.province_span');
+		if(province_name.indexOf(pname.html())>=0){
+			$(this).find('input').prop("checked", true);
+			provincesClickSp('nosub');
+			$(this).find('span.outter').addClass('current');
+			return false;	
+		}
+	});
+	
+	$('.city_label_div label').each(function(){
+		var pname = $(this).find('span.city_span');
+		if(pname.html().indexOf(city_name)>=0){
+			$(this).find('input').prop("checked", true);
+			$(this).find('span.outter').addClass('current');
+			return false;		
+		}
+	});
+	
+	
+	$('.city_label_div_sp label').each(function(){
+		var pname = $(this).find('span.city_span');
+		if(pname.html().indexOf(city_name)>=0){
+			$(this).find('input').prop("checked", true);
+			$(this).find('span.outter').addClass('current');
+			return false;		
+		}
+	});
+	
+	subShopSearch();
+}
+
+
+function subShopSearch()
+{
+	if(subShopSearch_already==true) return;
+	
+	var sp_surfix = '';
+	if($('.shop_search_bar_sp').css('display')!='none'){
+		sp_surfix = 'Sp';
+	}
+	var keyword = $('input#SearchKeyword'+sp_surfix).val();
+	var keyword_placeholder = $('input#SearchKeyword'+sp_surfix).attr('placeholder');
+	if(keyword_placeholder==keyword) keyword='';
+	var product = $('input[name="SearchProduct'+sp_surfix+'"]:checked').val();
+	var type = $('input[name="SearchType'+sp_surfix+'"]:checked ').val();
+	var province = $('input[name="SearchProvince'+sp_surfix+'"]:checked').val();
+	var city_arr = new Array();
+	$('input[name="SearchCity'+sp_surfix+'"]:checked').each(function(){
+		city_arr.push($(this).val());
+	})
+	var city = city_arr.join(',');
+	
+	if(!type || !product){
+		alert('■ 请选择网点类型和产品。');
+		return;
+	}
+	if(!province){
+		alert('■ 请选择所在省份或直辖市。');
+		return;
+	}
+	
+	$('.search-loading').show();
+	$('#storeList_div').html('');
+	parentLabelClass();
+	
+	subShopSearch_already = true;
+	var date = new Date();
+	var time = date.getFullYear() + "" + date.getMonth() + "" + date.getDate();	
+	$.ajax({
+		type:'GET',
+		url:'/support/shop_map/index.html?task=getShops',
+		data:{p:province,c:city,i:product,t:type,k:encodeURIComponent(keyword),time:time},
+		dataType:"json",
+		success:function(msg){
+			
+			$('.search-loading').hide();
+						
+			infoWindow.length = 0;
+			point.length = 0;
+			for(j in marker){
+				eval('marker['+j+'].remove()');
+			}
+			marker.length = 0;
+			
+			var icon=new BMap.Icon("/templates/casio/images/marker_c.png",new BMap.Size(40, 33),{anchor:new BMap.Size(40, 33),infoWindowAnchor: new BMap.Size(20,16)});			
+			
+			if(msg.type==1){
+				var html = '<div class="store-header"><h3>以下<span>'+msg.data.length+'</span>件搜索结果<br/><span class="txt-grey">'+msg.product+' - '+msg.provincecity+' - '+(msg.type==1?'销售':'维修')+'网点</span></h3>';
+				html += '<div class="store-results"><ul id="store-results_ul">';
+				html += '</ul></div>';
+			}else{
+				var html = '<div class="store-header store-header2"><h3><span class="txt-grey">'+msg.product+' - '+msg.provincecity+' - '+(msg.type==1?'销售':'维修')+'网点（' + msg.data.length + '）</span></h3>';
+				html += '<div class="store-results"><ul id="store-results_ul" class="store-results_ul2">';
+				html += '</ul></div>';
+			}
+						
+			$(html).appendTo($('#storeList_div'));
+			
+			var tablehtml = '<table class="table-m1" border="0" cellspacing="0" cellpadding="3"><tr align="center"><th>网点名称</th> <th>地址</th> <th width="190px">电话</th> <th width="190px">传真</th></tr>';
+			var first_point = null;
+			var number = 1;
+			for(i in msg.data){
+				var item = msg.data[i];	
+				
+				var html = '';		
+				html += '<li>'
+					html += '<span class="store-signs">';
+						html += '<span class="store-number">'+number+'</span>';
+						html += '<span class="store-image"><img alt="'+number+'" src="/templates/casio/images/marker_c.png" /></span>';
+					html += '</span>';
+					
+					html += '<span class="store-wrap">';
+						
+						if(msg.type==1){
+							if(item.type){
+								html += '<h4>'+item.type+'</h4>';
+							}else{
+								html += '<h4>'+(msg.type==1?'销售':'维修')+'网点</h4>';
+							}	
+						}else{
+							//nothing for 维修
+						}					
+						html += '<address>';
+							if(msg.type==1){
+								html += '<span class="store-name" itemprop="name"><span class="hidden"></span>'+item.name+'</span><br>';
+								html += '<span>';
+								//if(item.type) html += '<span>类型：'+item.type+'</span><br>';
+								html += '<span class="news-address" itemprop="streetAddress">地址：'+item.address+'</span><br>';								
+								if(item.contact) html += '<span class="locality" itemprop="tel">'+item.contact+'</span>';
+								html+='<br>';
+							}else{
+								html += '<span class="store-name" itemprop="name"><span class="hidden"></span><b>'+item.name+'</b></span><br>';
+								html += '<span>';
+								html += '<span class="news-address" itemprop="streetAddress">'+item.address+'</span><br>';								
+								if(item.contact) html += '<span class="locality" itemprop="tel">'+item.tel+'</span>';								
+							}
+							
+							html += '</span>';
+						html += '</address>';
+					html += '</span>';
+					
+				html += '</li>';
+				
+				//console.log(item.x+' '+item.y);
+				if(item.x && item.y){
+					eval('point['+i+'] = new BMap.Point(item.y,item.x)');
+					if(i==0){
+						first_point = new BMap.Point(item.y,item.x);
+					}
+					eval('marker['+i+'] = new BMap.Marker(point['+i+'],{icon:icon})')
+					eval('map.addOverlay(marker['+i+'])');
+					var string = "<b>"+item.name+"</b><br/>"+item.address+"<br/>"+item.contact
+					eval('infoWindow['+i+'] = new BMap.InfoWindow(string,{width:300})');
+					eval('marker['+i+'].addEventListener("click",function(){this.openInfoWindow(infoWindow['+i+'])})');
+					eval('$(html).bind("click",function(){$("#store-results_ul li.current").removeClass("current");$(this).addClass("current");marker['+i+'].openInfoWindow(infoWindow['+i+']);}).appendTo($("#store-results_ul"))');
+				}else{
+					eval('$(html).css("cursor","default").appendTo($("#store-results_ul"))');
+				}
+				
+				tablehtml += '<tr><td>'+item.name+'</td><td>'+item.address+'</td><td>'+item.tel+'</td><td>'+item.fax+'</td></tr>';
+				
+				number++;
+			}
+			
+			tablehtml += '</table>';
+			$('#maptabList2').html(tablehtml);
+			
+			//focus on first point
+			if(msg.data.length==1)
+				map.centerAndZoom(first_point,16);
+			else if(msg.data.length>1){
+				var fpoint = new BMap.Point(msg.ymid,msg.xmid);
+				if(sp_surfix) msg.level = msg.level-1;
+				map.centerAndZoom(fpoint,msg.level);
+			}
+			
+			//deal province_not_exists
+			$('.p_labels').show();
+			var province_not_exists = msg.province_not_exists;
+			if(province_not_exists.length>=1){
+				for(i in province_not_exists){
+					$('.p_labels_'+province_not_exists[i]).hide();
+				}
+				
+				//20190131  sp每个整除为三的省市增加clear
+				var i = 0;
+				$('.province_label_div_sp .clear').remove();
+				$('.province_label_div_sp .p_labels').each(function(){
+					if($(this).css("display")!="none"){
+						i++;
+						if(i%3 == 0) {
+							$(this).after('<div class="clear"></div>');
+						}
+					}
+				});
+			}
+			
+			subShopSearch_already = false;
+		},
+		error:function(){
+			
+		}
+	});
+	
+}
+
+function clickGEO(){
+	if($('.shop_search_bar_sp').css('display')!='none'){
+		$('#shopmap_tabs1').click();
+	}
+	
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(
+    	function(r){
+		    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+		        x = r.point.lat;
+		        y = r.point.lng;
+		        map.centerAndZoom(r.point, 15);
+		        var myIcon = new BMap.Icon("/templates/casio/images/marker_red.png", new BMap.Size(23,25));
+		        var marker = new BMap.Marker(r.point,{icon:myIcon});
+		        //marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+		        map.addOverlay(marker);		         
+		    }else {
+		    	
+		    }        
+		}
+	)
+}
+
+function parentLabelClass()
+{
+	if(window.isIE && window.ieVersion < 9) {
+		
+		$('input[name="SearchType"]').parent().removeClass('checked');
+		$('input[name="SearchType"]:checked').parent().addClass('checked');
+		
+		$('input[name="SearchProduct"]').parent().removeClass('checked');
+		$('input[name="SearchProduct"]:checked').parent().addClass('checked');
+		
+		$('input[name="SearchProvince"]').parent().removeClass('checked');
+		$('input[name="SearchProvince"]:checked').parent().addClass('checked');
+		
+		$('input[name="SearchCity"]').parent().removeClass('checked');
+		$('input[name="SearchCity"]:checked').parent().addClass('checked');
+	}
+}
+
+function checkIsPhone()
+{
+	var ua = window.navigator.userAgent;
+	var ualower = ua.toLowerCase();
+	
+	if(ualower.match(/MicroMessenger/i)=="micromessenger") return false;
+	if(ualower.match(/qq/i)=="qq") return false;
+	
+	
+	if(  ua.indexOf('iPhone') > 0 || ua.indexOf('iPad') > 0 ||
+		(ua.indexOf('Android') > 0) && (ua.indexOf('Mobile') > 0) ||
+		ua.indexOf('Windows Phone') > 0   ){
+		return true;
+	}
+	
+	return false;
+}
+
+function checkIsWechat()
+{
+	var ua = window.navigator.userAgent;
+	var ualower = ua.toLowerCase();
+	
+	if(ualower.match(/MicroMessenger/i)=="micromessenger") return true;
+	if(ualower.match(/qq/i)=="qq") return true;
+		
+	return false;
+}
+
+function ie8placeHolderString(input_name)
+{
+	var inputobj = $("input[name='"+input_name+"']");
+	var inputobj1 = inputobj.val();
+	var inputobj2 = inputobj.attr('placeholder');
+	if(inputobj1==inputobj2){
+		inputobj.val('');
+	}
+}
+
+function spLive800Hide()
+{
+	$('div.lim_float_icon').hide();$('a.lim_float_icon_a').hide();
+	setcookie('spLive800HideSP','1',3600*1000,'/');
+}
+
+function spLive800HideCheck()
+{
+	var spLive800Hide = getcookie('spLive800HideSP');
+	if(spLive800Hide=='1'){
+		setTimeout(function(){
+			$('div.lim_float_icon').hide();$('a.lim_float_icon_a').hide();
+		},0)
+	}
+}
+
+$(function(){
+	//2016-10-31 全站搜索时加时间戳
+	var date = new Date();
+	var time = date.getFullYear() + "" + date.getMonth() + "" + date.getDate();
+	$("<input type='hidden' value='" + time + "' name='time' />").prependTo($(".search div"));
+	$("<input type='hidden' value='" + time + "' name='time' />").prependTo($("#global-navigation form"))
+	
+	//Bind GA outbound.
+    $("a").each(function(n){
+        var url = $(this).attr('href');
+        var clickEvent = $(this).attr('onclick');
+
+        //If click event is exists.
+        if (clickEvent != null && clickEvent.length > 0) {
+            return true;
+        }
+
+        //If the link is not outside link.
+        var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)([A-Za-z0-9-~./?&#=])+$/;
+        if(!reg.test(url)){
+        	return true;
+        }
+        
+        console.log("2");
+        $(this).click(function(e){console.log("1");            
+            var url = $(this).attr('href');
+            var target = new String($(this).attr('target')).toLowerCase();
+
+            try { 
+                _gaq.push(['_trackEvent', 'Outbound Links' , url]); 
+            } catch(err){
+                ;
+            }
+			if (target == '_blank') {                	
+            	return true;
+            }else{
+            	//Prevent original click event.
+            	e.preventDefault();
+            	setTimeout(function() {               
+	            	window.location.href = url;                
+	            }, 200);
+	            return false;
+            }            
+        });
+    });
+});
+
+function outbound(th){
+    var url = $(th).attr('href');
+    var target = new String($(th).attr('target')).toLowerCase();
+
+    try { 
+        _gaq.push(['_trackEvent', 'Outbound Links' , url]); 
+    } catch(err){
+        ;
+    }
+    
+    console.log(2);
+    if (target == '_blank') {
+    	return true;
+    }else{
+    	setTimeout(function() {
+	        window.location.href = url;       
+	    }, 200);
+	    return false;
+    }
+}

@@ -1,0 +1,463 @@
+/* Title:       Forms’ stylesheet
+   Theme URI:   http://www.casio.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+
+/* Normalize
+─────────────────────────────────────────────────────────────────────────────────── */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	margin: 0;
+	font: inherit;
+	color: inherit;
+}
+button {
+	overflow: visible;
+}
+button,
+select {
+	text-transform: none;
+}
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+	cursor: pointer;
+	-webkit-appearance: button;
+}
+button[disabled],
+html input[disabled] {
+	cursor: default;
+}
+legend,
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+input {
+	line-height: normal;
+}
+input[type='checkbox'],
+input[type='radio'] {
+	padding: 0;
+	box-sizing: border-box;
+}
+textarea,
+input[type='text'],
+input[type='search'] {
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	height: auto;
+}
+input[type='search'] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	   -moz-box-sizing: content-box;
+	        box-sizing: content-box;
+}
+input[type='search']::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+input[type='image']:active:not([disabled]) {
+	opacity: .9;
+	-webkit-transform: scale(.95, .95);
+	   -moz-transform: scale(.95, .95);
+	        transform: scale(.95, .95);
+}
+fieldset {
+	margin: 0 2px;
+	padding: .35em .625em .75em;
+	border: 1px solid #c0c0c0;
+}
+textarea {
+	overflow: auto;
+}
+optgroup {
+	font-weight: bold;
+}
+
+
+
+/* Note
+─────────────────────────────────────────────────────────────────────────────────── */
+.panel-grey-light .note {
+	font-size: .866em;
+}
+
+
+/* Label
+─────────────────────────────────────────────────────────────────────────────────── */
+
+label {
+	display: block;
+	margin-bottom: 1em;
+	font-weight: bold;
+}
+
+
+/* Alert
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.alert {
+	padding: 0.733em 1em;
+	background: #fee;
+	font-size: .8em;
+	color: #900;
+}
+
+
+/* Radio
+─────────────────────────────────────────────────────────────────────────────────── */
+
+input[type="radio"] {
+	margin-right: .8em;
+}
+
+/* fieldset */
+.radio-set {
+	position: relative;
+	margin: 0;
+	border: none;
+	padding: 0;
+	background: transparent;
+	overflow: hidden;
+}
+
+.radio-set label {
+	display: inline-block;
+	margin: 0 1.33em;
+	font-weight: normal;
+}
+
+
+/* Checkbox
+─────────────────────────────────────────────────────────────────────────────────── */
+
+input[type="checkbox"] {
+	margin-right: .8em;
+}
+
+/* fieldset */
+.checkbox-set {
+	position: relative;
+	margin: 0;
+	border: none;
+	padding: 0;
+	background: transparent;
+	overflow: hidden;
+}
+
+.checkbox-set label {
+	display: inline-block;
+	margin: 0 1.33em;
+	font-weight: normal;
+}
+
+
+/* Field
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class^="field"],
+[class*="field-"] {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	display: block;
+	width: 100%;
+	border: 1px solid #d5d4d4;
+	background: #f5f5f5;
+}
+
+[class^="field"]:hover,
+[class*="field-"]:hover {
+	border-color: #abaaaa;
+}
+
+[class^="field"]:focus,
+[class*="field-"]:focus {
+	border-color: #003296;
+	outline: 0;
+}
+
+.field {
+	padding: 1em;
+}
+
+.field-small {
+	font-size: .8em;
+	padding: 1em;
+}
+
+
+
+/* Submit Fieldset
+─────────────────────────────────────────────────────────────────────────────────── */
+
+.submit-set {
+	position: relative;
+	margin: 0 0 1em;
+	border: none;
+	padding: 0;
+	background: transparent;
+	overflow: hidden;
+}
+
+.submit-set .input {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 9em;
+	display: block;
+}
+.submit-set .input [class*="field"] {
+	padding: .25em 1em;
+	height: 100%;
+}
+
+.submit-set [class*="button"] {
+	float: right;
+	padding: .25em 1em;
+	width: 7em;
+}
+
+
+/* Button
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="button"] {
+	display: block;
+	padding: 1em;
+	text-align: center;
+	line-height: 1.2;
+	font-weight: bold;
+	color: #fefefe;
+	border: 1px solid #003296;
+	background: #003296;
+}
+
+a[class*="button"] {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	text-decoration: none;
+}
+
+[class*="button"]:hover,
+[class*="button"]:focus {
+	border-color: #6684c0;
+	background: #6684c0;
+	color: #e0e6f2;
+}
+
+[class*="button"]:active {
+	border-color: #345aab;
+	background: #345aab;
+	color: #fefefe;
+}
+
+[class*="button"]:focus,
+[class*="button"]:active {
+	outline: 0;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	[class*="button"] {
+		display: inline-block;
+	}
+}
+
+
+/* Button Size
+─────────────────────────────────────────────────────────────────────────────────── */
+.button-small {
+	padding: .95em 1em .8em;
+}
+
+/* PC > 768px */
+@media print, screen and (max-width: 47.9em) {
+
+	.button-100 {
+		width: 100%;
+	}
+	.button-70 {
+		width: 70%;
+	}
+	.button-50 {
+		width: 50%;
+	}
+
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	.button--100 {
+		width: 100%;
+	}
+	.button--70 {
+		width: 70%;
+	}
+	.button--50 {
+		width: 50%;
+	}
+	.button--30 {
+		width: 30%;
+	}
+}
+
+
+/* Button Color
+─────────────────────────────────────────────────────────────────────────────────── */
+
+/* alt */
+.button-alt {
+	border-color: #100d0d;
+	background: #100d0d;
+	color: #fefefe;
+}
+
+.button-alt:hover,
+.button-alt:focus {
+	border-color: #706e6e;
+	background: #706e6e;
+	color: #e2e1e1;
+}
+
+.button-alt:active {
+	border-color: #403d3d;
+	background: #403d3d;
+	color: #fefefe;
+}
+
+/* sec */
+.button-sec {
+	border-color: #e4e4e4;
+	background: #e4e4e4;
+	color: #100d0d;
+}
+
+.button-sec:hover,
+.button-sec:focus {
+	border-color: #bfbfbf;
+	background: #bfbfbf;
+	color: #333131;
+}
+
+.button-sec:active {
+	border-color: #d3d3d3;
+	background: #d3d3d3;
+	color: #100d0d;
+}
+
+.bg-ultra-light-grey .button-sec {
+	border-color: #d7d7d7;
+	background: #d7d7d7;
+	color: #100d0d;
+}
+
+.bg-ultra-light-grey .button-sec:hover,
+.bg-ultra-light-grey .button-sec:focus {
+	border-color: #bababa;
+	background: #bababa;
+	color: #333131;
+}
+
+.bg-ultra-light-grey .button-sec:active {
+	border-color: #cecece;
+	background: #cecece;
+	color: #100d0d;
+}
+
+/* warning */
+.button-warning {
+	border-color: #c81d1d;
+	background: #c81d1d;
+	color: #fefefe;
+}
+.button-warning:hover,
+.button-warning:focus {
+	border-color: #de7777;
+	background: #de7777;
+	color: #f8e3e3;
+}
+.button-warning:active {
+	border-color: #d34a4a;
+	background: #d34a4a;
+	color: #fefefe;
+}
+
+/* inactive */
+.button-inactive,
+.button-inactive:hover,
+.button-inactive:focus,
+.button-inactive:active {
+	border-color:  #e8e8e8;
+	background: #f8f8f8;
+	color: #b8b7b7;
+	cursor: default;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	/* bg-white button-sec */
+	.bg-ultra-light-grey .bg--white .button-sec {
+		border-color: #e4e4e4;
+		background: #e4e4e4;
+		color: #100d0d;
+	}
+	.bg-ultra-light-grey .bg--white .button-sec:hover,
+	.bg-ultra-light-grey .bg--white .button-sec:focus {
+		border-color: #bfbfbf;
+		background: #bfbfbf;
+		color: #333131;
+	}
+	.bg-ultra-light-grey .bg--white .button-sec:active {
+		border-color: #cecece;
+		background: #cecece;
+		color: #100d0d;
+	}
+
+	/* bg-ultra-light-grey button-sec */
+	.bg-white .bg--ultra-light-grey .button-sec {
+		border-color: #d7d7d7;
+		background: #d7d7d7;
+		color: #100d0d;
+	}
+	.bg-white .bg--ultra-light-grey .button-sec:active {
+		border-color: #cecece;
+		background: #cecece;
+		color: #100d0d;
+	}
+}
+
+
+/* Button Icon
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="button"] .icon {
+	margin-right: 0.5em;
+}
+
+
+/* placeholder
+─────────────────────────────────────────────────────────────────────────────────── */
+
+::-webkit-input-placeholder {
+    color: #707070;
+}
+::-moz-placeholder {
+    color: #707070;
+}
+:-ms-input-placeholder {
+    color: #707070;
+}

@@ -1,0 +1,299 @@
+/* Title:       Table stylesheet
+   Theme URI:   http://www.casio.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+
+/* Normalize
+─────────────────────────────────────────────────────────────────────────────────── */
+
+table {
+	border-collapse: collapse;
+}
+th {
+	font-weight: normal;
+	text-align: left;
+}
+
+
+/* Headers
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="table"] .t-size-large {
+	padding: 0 .533em;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	[class*="table"] .t-size-large {
+		margin-top: 1.5em;
+		margin-bottom: 1.5em;
+	}
+	[class*="table"] .t-size-large.no--mt {
+		margin-top: 0;
+	}
+
+}
+
+
+/* Paragraph
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="table"] p,
+[class*="table"].list-symbol li,
+[class*="table"].note li {
+	margin: 0;
+}
+[class*="table"] .list-symbol li,
+[class*="table"] .note li {
+	list-style-type: none;
+}
+[class*="table"].note {
+	font-size: .8em;
+}
+
+[class*="table-"] p + p,
+[class*="table-"] p + ul,
+[class*="table-"] p + div,
+[class*="table-"] div + div,
+[class*="table-"] div + ul,
+[class*="table-"] div + p,
+[class*="table-"] ul + ul,
+[class*="table-"] ul + div,
+[class*="table-"] ul + p {
+	margin-top: 1em;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	[class*="table"] th p,
+	[class*="table"] td p,
+	[class*="table"] td .list-symbol li,
+	[class*="table"] td .note li {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	[class*="table-"] p + p,
+	[class*="table-"] p + ul,
+	[class*="table-"] p + div,
+	[class*="table-"] div + div,
+	[class*="table-"] div + ul,
+	[class*="table-"] div + p,
+	[class*="table-"] ul + ul,
+	[class*="table-"] ul + div,
+	[class*="table-"] ul + p {
+		margin-top: 1em;
+	}
+
+}
+
+
+/* S1 / S2 / S3
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="table-s"] table {
+	display: block;
+}
+[class*="table-s"] th,
+[class*="table-s"] td {
+	display: block;
+	padding: 0;
+	border: none;
+	background: transparent;
+	font-size: 1em;
+}
+
+[class*="table-s"] th {
+	margin-bottom: .5em;
+	font-weight: bold;
+}
+[class*="table-s"] td {
+	margin-bottom: 1em;
+	padding-left: 1em;
+}
+
+/* S1 */
+.table-s1 th {
+	font-weight: bold;
+}
+
+/* S3 */
+.table-s3 th {
+	display: list-item;
+	list-style: disc;
+	margin-left: 1.5em;
+}
+.table-s3 td {
+	display: list-item;
+	list-style: disc;
+	margin-left: 2.8em;
+}
+
+
+/* SP < 768px */
+@media print, screen and (max-width: 47.9em) {
+	[class*="table-s"] tbody,
+	[class*="table-s"] tr {
+		display: block;
+	}
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+	[class*="table-s"] table {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+	}
+
+	[class*="table-s"] th,
+	[class*="table-s"] td {
+		display: table-cell;
+		border: 1px solid #d5d4d4;
+		/* padding: 1.2em; */
+		padding: 0.8em;
+		font-size: 1em;
+	}
+	[class*="table-s"] th {
+		width: 31.4%;
+		color: #282828;
+		background: #f5f5f5;
+	}
+	[class*="table-s"] td {
+		background: #fff;
+	}
+
+	.table-s1 th {
+		font-weight: normal;
+	}
+}
+
+
+/* M1 / M2
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="table-m"] {
+	width: 100%;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+[class*="table-m"] table {
+	display: table;
+}
+
+[class*="table-m"] th,
+[class*="table-m"] td {
+	display: table-cell;
+	border: 1px solid #d5d4d4;
+	/* padding: 1.2em; */
+	padding: 0.8em;
+	font-size: 1em;
+}
+[class*="table-m"] th {
+	color: #282828;
+	background: #f5f5f5;
+}
+[class*="table-m"] td {
+	background: #fff;
+}
+[class*="table-m"] tr.blue td {
+	color: 0f3e9c;
+}
+
+/* M1 */
+.table-m1 th,
+.table-m1 td {
+	white-space: inherit;
+}
+
+/* M2 */
+.table-m2 th,
+.table-m2 td {
+	/* padding: 1.2em 1em; */
+	padding: 0.8em 1em;
+	text-align: center;
+}
+.table-m2 th p,
+.table-m2 td p {
+	white-space: normal;
+	padding: 0 .6em;
+	text-align: left;
+}
+
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	[class*="table-m"] {
+		overflow: visible;
+	}
+	[class*="table-m"] table {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+		margin-bottom: 1em;
+	}
+
+	/* M1 */
+	.table-m1 th,
+	.table-m1 td {
+	  white-space: normal;
+	}
+
+	/* M2 */
+	.table-m2,
+	.table-m2 table {
+		margin-bottom: 0;
+	}
+
+}
+
+
+/* list
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="table"] td ul:not(.note) {
+	padding-left: 0;
+	margin-left: 1.5em;
+}
+
+[class*="table"] td li {
+	position: relative;
+	list-style-type: disc;
+	margin-top: .5em;
+	padding-left: 0;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	[class*="table"] ul {
+		margin: 0;
+	}
+
+	[class*="table"] td ul:not(.note) li:before {
+		content: none;
+	}
+}
+
+
+/* Note
+─────────────────────────────────────────────────────────────────────────────────── */
+
+[class*="table"] .list-symbol,
+[class*="table"] .note {
+	margin-top: .5em;
+	font-size: 1em;
+}
+
+/* PC > 768px */
+@media print, screen and (min-width: 48em) {
+
+	.table-note {
+		margin-top: 1em;
+	}
+
+}
